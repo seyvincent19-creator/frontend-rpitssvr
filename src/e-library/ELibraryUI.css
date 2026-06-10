@@ -1,0 +1,64 @@
+.navbar {
+  /* ✅ dark gradient background so text is always readable */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,   /* semi-transparent black at the very top */
+    rgba(0, 0, 0, 0.8) 60%, /* darker in the middle */
+    black 100%              /* fully black at the bottom */
+  );
+}
+
+.navbar a,
+.navbar-brand {
+  /* ✅ makes white text pop on top of bright images */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Default (light) */
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+body.dark-theme .navbar {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+body.dark-theme .card {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+.type-library{
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    background-color: #e3f2fd;
+}
+.category-card {
+  /* Card Styling */
+  background-color: #ffffff;
+  padding: 20px 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Initial box-shadow */
+  cursor: pointer;
+
+  /* Animation Properties */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.category-card:hover {
+  /* Animation on Hover */
+  transform: translateY(-5px) scale(1.03); /* Lifts the card up and makes it slightly larger */
+  
+  /* Enhanced box-shadow on Hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.khmer-google-font{
+    font-family: "Siemreap", sans-serif;
+}

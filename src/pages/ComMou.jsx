@@ -1,0 +1,90 @@
+import React from "react";
+import DepartmentSidebar from "./departments/DepartmentSidebar"; // Import the sidebar component
+import SectionMOU from "../components/SectionMOU";
+
+const img_about1 = [
+  { id: 1, path: "/images/img-idustry/1.jpg" },
+  { id: 2, path: "/images/img-idustry/2.jpg" },
+  { id: 3, path: "/images/img-idustry/3.jpg" },
+  { id: 4, path: "/images/img-aboutus/s4.JPG" },
+  { id: 5, path: "/images/img-aboutus/s5.jpg" },
+  { id: 6, path: "/images/img-aboutus/s6.JPG" },
+  { id: 7, path: "/images/img-aboutus/s7.jpg" },
+  { id: 8, path: "/images/img-idustry/4.jpg" },
+  { id: 9, path: "/images/img-idustry/5.jpg" },
+ 
+];
+
+const ComMou = () => {
+  return (
+    <div className="container my-4">
+      <div className="row">
+        {/* Main Content */}
+        <div className="col-md-8">
+          <h1 className="khmer-title mb-3">
+            ការិយាល័យទំនាក់ទំនង និងស្រាវជ្រាវ
+          </h1>
+          <p className="lead" style={{ color: "#2980b9" ,fontFamily: "Siemreap"}}>
+             ការិយាល័យទំនាក់ទំនង និងស្រាវជ្រាវ ជាអង្គភាពសំខាន់មួយរបស់វិទ្យាស្ថាន ដែលមានភារកិច្ច និងតួនាទីក្នុងការតភ្ជាប់ និងសហការរវាងវិទ្យាស្ថាននិងវិស័យឧស្សាហកម្ម។ គោលបំណងសំខាន់គឺដើម្បីធ្វើឲ្យកម្មវិធីសិក្សា និងជំនាញរបស់និស្សិតឆាប់ឆាប់សមស្របនឹងតម្រូវការទីផ្សារការងារ និងការអភិវឌ្ឍឧស្សាហកម្មជាក់ស្តែង។
+          </p>
+                   
+
+          <h5 className="mb-2 khmer-title">តួនាទីសំខាន់ៗ</h5>
+          <ul className="mb-3">
+            <li style={{ fontFamily: "Siemreap"}}><b>បង្កើតទំនាក់ទំនងជាមួយសហគ្រាសឧស្សាហកម្ម</b> ដើម្បីស្វែងរកឱកាសសហការផ្នែកហ្វឹកហាត់ការងារ ឬបំពេញការងារបន្ទាប់ពីបញ្ចប់ការសិក្សា។</li>
+            <li style={{ fontFamily: "Siemreap"}}><b>សម្របសម្រួលកម្មវិធីហ្វឹកហាត់ការងារ (Internship Program)</b> រវាងនិស្សិតនិងក្រុមហ៊ុន ដោយធានាថាការហ្វឹកហាត់មានគុណភាព និងទទួលបានបទពិសោធន៍ពិតប្រាកដ។</li>
+            <li style={{ fontFamily: "Siemreap"}}><b>ប្រមូល និងវិភាគព័ត៌មានពីទីផ្សារការងារ</b> ដើម្បីផ្តល់ជាចំណេះដឹង និងយោបល់សម្រាប់ការកែប្រែកម្មវិធីសិក្សាឲ្យសមស្របនឹងតម្រូវការរបស់ឧស្សាហកម្ម។</li>
+            <li style={{ fontFamily: "Siemreap"}}><b>រៀបចំសិក្ខាសាលា និងសន្និសីទអាជីព</b> ដើម្បីអញ្ជើញអ្នកជំនាញ ឬអ្នកតំណាងក្រុមហ៊ុនមកចែករំលែកបទពិសោធន៍ជាមួយនិស្សិត។</li>
+            <li style={{ fontFamily: "Siemreap"}}><b>ជំរុញការសហការផ្នែកស្រាវជ្រាវ និងបច្ចេកវិទ្យា</b> រវាងវិទ្យាស្ថាននិងឧស្សាហកម្ម ដើម្បីបង្កើនការច្នៃប្រឌិត និងអនុវត្តចំណេះដឹងក្នុងជីវិតពិត។</li>
+            
+          </ul>
+
+          <h5 className="mb-2 khmer-title">សកម្មភាពសំខាន់ៗ</h5>
+          <ul className="mb-3">
+            <li style={{ fontFamily: "Siemreap"}}>រៀបចំ កម្មវិធីហ្វឹកហាត់ការងារ និងការសិក្សាក្រៅសាលា ជាប្រចាំឆ្នាំ។</li>
+            <li style={{ fontFamily: "Siemreap"}}>បង្កើត បណ្ដាញសហការណ៍ (Industry Network) ជាមួយសហគ្រាសនានា។</li>
+            <li style={{ fontFamily: "Siemreap"}}>រៀបចំ Career Fair / Job Fair ដើម្បីផ្តល់ឱកាសឲ្យនិស្សិតជួបជាមួយអ្នកជ្រើសរើសបុគ្គលិក។</li>
+            <li style={{ fontFamily: "Siemreap"}}>បង្កើត ប្រព័ន្ធទិន្នន័យសហគ្រាស និងប្រវត្តិនិស្សិតសិក្សាបញ្ចប់សម្រាប់ប្រើប្រាស់ជាប្រយោជន៍ក្នុងការជ្រើសរើសបុគ្គលិក។</li>
+            <li style={{ fontFamily: "Siemreap"}}>សហការជាមួយគ្រប់ដៃគូសម្រាប់ ការសិក្សា បណ្តុះបណ្តាល និងការស្រាវជ្រាវរួម។</li>
+        
+          </ul>
+          <h5 className="mb-2 khmer-title">គោលបំណងសរុប</h5>
+          <ul className="mb-3">
+            <li style={{ fontFamily: "Siemreap"}}>បង្កើតសហសម្ព័ន្ធរវាងវិទ្យាស្ថាននិងវិស័យឧស្សាហកម្ម។</li>
+            <li style={{ fontFamily: "Siemreap"}}>បង្កើនសមត្ថភាពនិស្សិតឲ្យសមរម្យនឹងតម្រូវការការងារ។</li>
+            <li style={{ fontFamily: "Siemreap"}}>ជំរុញឲ្យវិទ្យាស្ថានមានភាពទាន់សម័យក្នុងការផ្តល់ការអប់រំបច្ចេកទេស និងវិជ្ជាជីវៈ។</li>
+            <li style={{ fontFamily: "Siemreap"}}>បង្កើតឱកាសការងារសម្រាប់និស្សិតបញ្ចប់ការសិក្សា។</li>
+            
+          </ul>
+          
+
+          {/* Image Gallery */}
+          <h5 className="mb-3">រូបភាពសកម្មភាពទំនាក់ទំនងជាមួយវិស័យឯកជន និងរោងចក្រឧស្សាហកម្ម</h5>
+          <div className="row g-3">
+            {img_about1.map((image) => (
+              <div className="col-6 col-md-4" key={image.id}>
+                <img
+                  src={image.path}
+                  alt={`Campus ${image.id}`}
+                  className="img-fluid rounded shadow-sm"
+                />
+              </div>
+            ))}
+          </div>
+          {/* mou section */}
+          <div className="mt-2">
+            <SectionMOU />
+          </div>
+          
+        </div>
+
+        {/* Sidebar */}
+        <div className="col-md-4">
+          <DepartmentSidebar />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ComMou;

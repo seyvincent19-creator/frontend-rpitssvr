@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Khmer+OS+Moul+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Khmer+OS+Battambang&display=swap');
+.khmer-title {
+  font-family: 'Khmer OS Moul Light', sans-serif;
+  font-size: 1.3rem; /* Adjusted for better readability */
+  color: #1625fc; /* Softer than pure black */
+  text-align: center;
+}

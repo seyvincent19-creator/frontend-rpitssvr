@@ -1,0 +1,48 @@
+/* Hide ImageSlider on screens smaller than 768px (Bootstrap md breakpoint) */
+@media (max-width: 767.98px) {
+  .image-slider-container {
+    display: none !important;
+  }
+}
+/* Sidebar.css */
+
+.image-slider-container {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.image-slider-container:hover {
+  background-color: #495057; /* slightly darker secondary */
+  transform: translateY(-2px);
+}
+
+.fb-plugin-wrapper {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 5px;
+}
+
+.fb-plugin-wrapper .fb-page {
+  width: 100% !important;
+}
+
+.fb-plugin-wrapper a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.fb-plugin-wrapper a:hover {
+  text-decoration: underline;
+}
+.image-slider-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.fb-plugin-wrapper {
+  width: 100%;
+  max-width: 320px; /* match data-width */
+  margin: 0 auto;
+}

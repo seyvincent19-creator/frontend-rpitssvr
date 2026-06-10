@@ -1,0 +1,5 @@
+/* ElectricPage.css */
+.carousel-inner img {
+  height: 250px; /* Reduced from 400px */
+  object-fit: cover;
+}
