@@ -25,20 +25,20 @@ useEffect(() => {
   <div className="fb-plugin-wrapper">
     <div
       className="fb-page"
-      data-href="https://web.facebook.com/R.P.I.T.S.S.R"
+      data-href="https://web.facebook.com/RPITSSVR.Official"
       data-tabs="timeline"
-      data-width="200"
+      data-width="380"
       data-height=""
       data-small-header="false"
       data-adapt-container-width="true"
       data-hide-cover="false"
-      data-show-facepile="true"
+      data-show-facepile="false"
     >
       <blockquote
-        cite="https://web.facebook.com/R.P.I.T.S.S.R"
+        cite="https://web.facebook.com/RPITSSVR.Official"
         className="fb-xfbml-parse-ignore"
       >
-        <a href="https://web.facebook.com/R.P.I.T.S.S.R">Facebook</a>
+        <a href="https://web.facebook.com/RPITSSVR.Official">Facebook</a>
       </blockquote>
     </div>
   </div>
