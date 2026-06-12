@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useLanguage } from "../context/LanguageContext";
 import "./SectionMOU.css";
 
 const mouPartners = [
@@ -26,6 +27,7 @@ const mouPartners = [
 ];
 
 const SectionMOU = () => {
+  const { t } = useLanguage();
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -36,7 +38,7 @@ const SectionMOU = () => {
         <div className="row align-items-center">
           {/* MOU Logos */}
           <div className="col-12 col-md-9 mb-4 mb-md-0">
-            <h3 className="mb-4 text-center text-md-start text-white">🤝 Our MOU Partners</h3>
+            <h3 className="mb-4 text-center text-md-start text-white">{t('mou_heading')}</h3>
             <div className="row g-3 justify-content-center justify-content-md-start">
               {mouPartners.map((partner) => (
                 <div className="col-4 col-sm-3 col-md-3 col-lg-2 text-center" key={partner.id}>

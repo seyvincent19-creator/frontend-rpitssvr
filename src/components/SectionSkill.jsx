@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import "aos/dist/aos.css";
+import { useLanguage } from "../context/LanguageContext";
 import "./SectionSkill.css";
 
 const SectionSkill = () => {
+  const { t } = useLanguage();
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,7 +49,7 @@ const SectionSkill = () => {
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
-        <p className="mt-2">Loading departments...</p>
+        <p className="mt-2">{t('dept_loading')}</p>
       </div>
     );
   }
@@ -57,7 +58,7 @@ const SectionSkill = () => {
     return (
       <div className="container py-5 text-center">
         <div className="alert alert-danger" role="alert">
-          Error loading departments: {error}
+          {t('dept_error')} {error}
         </div>
       </div>
     );
@@ -67,7 +68,7 @@ const SectionSkill = () => {
     return (
       <div className="container py-5 text-center">
         <div className="alert alert-info" role="alert">
-          No departments found.
+          {t('dept_empty')}
         </div>
       </div>
     );
@@ -76,7 +77,7 @@ const SectionSkill = () => {
   return (
     <div className="container py-5">
       <h2 className="text-center mb-4" style={{ fontFamily: "Siemreap", color: "#134EED" }}>
-        🚀 Explore Our Departments
+        {t('dept_heading')}
       </h2>
       <div className="row g-4">
         {departments.map((department) => {
@@ -133,13 +134,13 @@ const SectionSkill = () => {
                       to={`/department/${department.id}`}
                       className="btn btn-outline-primary btn-sm rounded-pill"
                     >
-                      Read More
+                      {t('dept_read_more')}
                     </Link>
                     <Link
                       to={`/enrollment`}
                       className="btn btn-primary btn-sm rounded-pill"
                     >
-                      Enroll
+                      {t('dept_enroll')}
                     </Link>
                     
                   </div>

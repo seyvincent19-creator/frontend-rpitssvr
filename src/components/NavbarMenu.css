@@ -227,3 +227,22 @@
   background: #1d4ed8;
   color: #fff;
 }
+
+/* Language toggle button */
+.lang-toggle-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.15s;
+  font-family: "Siemreap", "Segoe UI", sans-serif;
+  white-space: nowrap;
+}
+.lang-toggle-btn:hover {
+  background: #1d4ed8;
+}

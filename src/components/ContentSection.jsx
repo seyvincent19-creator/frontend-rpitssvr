@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ContentSection.css";
 import { Link } from "react-router-dom";
 import { FaEye, FaShareAlt, FaFacebookF, FaTelegramPlane, FaNewspaper } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 const API_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/articles";
 const BASE_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/storage/";
@@ -48,7 +49,7 @@ const ShareDropdown = ({ item }) => (
   </div>
 );
 
-const FeaturedCard = ({ item }) => (
+const FeaturedCard = ({ item, t }) => (
   <div className="content-featured-card h-100">
     <Link to={`/article/${item.id}`} className="d-block featured-img-wrap">
       <img
@@ -57,7 +58,7 @@ const FeaturedCard = ({ item }) => (
         className="featured-img"
         onError={(e) => { e.target.onerror = null; e.target.src = PLACEHOLDER; }}
       />
-      <span className="featured-badge">ពិសេស</span>
+      <span className="featured-badge">{t('news_featured')}</span>
     </Link>
     <div className="content-card-body">
       <Link to={`/article/${item.id}`} className="text-decoration-none">
@@ -70,7 +71,7 @@ const FeaturedCard = ({ item }) => (
         </span>
         <div className="d-flex align-items-center gap-2">
           <Link to={`/article/${item.id}`} className="btn btn-primary btn-sm rounded-pill px-3">
-            អានបន្ត →
+            {t('news_read_more')}
           </Link>
           <ShareDropdown item={item} />
         </div>
@@ -79,7 +80,7 @@ const FeaturedCard = ({ item }) => (
   </div>
 );
 
-const SmallCard = ({ item }) => (
+const SmallCard = ({ item, t }) => (
   <div className="content-small-card">
     <Link to={`/article/${item.id}`} className="small-card-img-wrap">
       <img
@@ -99,7 +100,7 @@ const SmallCard = ({ item }) => (
         </span>
         <div className="d-flex align-items-center gap-2">
           <Link to={`/article/${item.id}`} className="btn btn-outline-primary btn-sm rounded-pill px-2" style={{ fontSize: "12px" }}>
-            អានបន្ត
+            {t('news_read_more_short')}
           </Link>
           <ShareDropdown item={item} />
         </div>
@@ -109,6 +110,7 @@ const SmallCard = ({ item }) => (
 );
 
 const ContentSection = () => {
+  const { t } = useLanguage();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -136,11 +138,11 @@ const ContentSection = () => {
     <div className="content-section">
       <div className="content-section-header">
         <FaNewspaper className="me-2" />
-        <span>ព័ត៌មានថ្មីៗ</span>
+        <span>{t('news_header')}</span>
       </div>
       <div className="text-center py-5">
         <div className="spinner-border text-primary" role="status" />
-        <p className="mt-2 text-muted">កំពុងផ្ទុក...</p>
+        <p className="mt-2 text-muted">{t('news_loading')}</p>
       </div>
     </div>
   );
@@ -149,9 +151,9 @@ const ContentSection = () => {
     <div className="content-section">
       <div className="content-section-header">
         <FaNewspaper className="me-2" />
-        <span>ព័ត៌មានថ្មីៗ</span>
+        <span>{t('news_header')}</span>
       </div>
-      <div className="alert alert-warning py-3">មិនអាចផ្ទុកព័ត៌មានបាន។ ({error})</div>
+      <div className="alert alert-warning py-3">{t('news_error')} ({error})</div>
     </div>
   );
 
@@ -160,25 +162,21 @@ const ContentSection = () => {
 
   return (
     <div className="content-section">
-      {/* Section Header */}
       <div className="content-section-header">
         <FaNewspaper className="me-2" />
-        <span>ព័ត៌មានថ្មីៗ</span>
+        <span>{t('news_header')}</span>
       </div>
 
       {articles.length === 0 ? (
-        <div className="alert alert-info py-3">មិនមានព័ត៌មានថ្មីៗទេ។</div>
+        <div className="alert alert-info py-3">{t('news_empty')}</div>
       ) : (
         <div className="row g-3">
-          {/* Featured */}
           <div className="col-lg-6">
-            {featured ? <FeaturedCard item={featured} /> : null}
+            {featured ? <FeaturedCard item={featured} t={t} /> : null}
           </div>
-
-          {/* Small Cards */}
           <div className="col-lg-6 d-flex flex-column gap-2">
             {rest.map((item) => (
-              <SmallCard key={item.id ?? item.article_id} item={item} />
+              <SmallCard key={item.id ?? item.article_id} item={item} t={t} />
             ))}
           </div>
         </div>

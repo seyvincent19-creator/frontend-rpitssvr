@@ -6,6 +6,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { LanguageProvider } from "./context/LanguageContext";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -53,6 +54,7 @@ function App() {
   }, []);
 
   return (
+    <LanguageProvider>
     <Router>
       <Layout>
         <Routes>
@@ -68,11 +70,10 @@ function App() {
           {/* New route for see all page with category param */}
           <Route path="/e-library/see-all/:category" element={<SeeAllItems />} />
           <Route path="/e-library/detail/:category/:id" element={<DetailItem />} />
-          
         </Routes>
       </Layout>
-      
     </Router>
+    </LanguageProvider>
   );
 }
 

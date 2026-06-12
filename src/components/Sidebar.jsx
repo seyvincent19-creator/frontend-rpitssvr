@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import "./Sidebar.css";
 import { FaFacebookF } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 const Sidebar = () => {
+  const { t } = useLanguage();
   useEffect(() => {
     if (!window.FB || !window.FB.XFBML || !window.FB.XFBML.parse) {
       ((d, s, id) => {
@@ -23,7 +25,7 @@ const Sidebar = () => {
       {/* Header */}
       <div className="sidebar-header">
         <FaFacebookF className="sidebar-fb-icon" />
-        <span>ព័ត៌មានពីហ្វេសប៊ុក</span>
+        <span>{t('sidebar_fb')}</span>
       </div>
 
       {/* Facebook Plugin */}
@@ -59,7 +61,7 @@ const Sidebar = () => {
         className="sidebar-follow-btn"
       >
         <FaFacebookF style={{ marginRight: "8px" }} />
-        តាមដានទំព័រ
+        {t('sidebar_follow')}
       </a>
     </div>
   );
