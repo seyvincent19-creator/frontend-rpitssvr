@@ -38,7 +38,7 @@ const Structure = () => {
             </p>
           </div>
           <img
-            src="/images/structure_rpi.jpg"
+            src="/images/structure_image.jpg"
             alt="Structure of RPI"
             className="img-fluid rounded shadow"
           />
