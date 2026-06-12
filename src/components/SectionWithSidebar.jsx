@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 
 const SectionWithSidebar = () => {
   return (
-    <div className="container">
+    <div className="container" style={{ paddingTop: "48px", paddingBottom: "48px" }}>
       <div className="row g-4 align-items-start">
         {/* Main Content Area */}
         <div className="col-lg-9">
@@ -13,10 +13,7 @@ const SectionWithSidebar = () => {
 
         {/* Sidebar Area */}
         <div className="col-lg-3">
-          <div
-            className="position-sticky bg-light p-3 rounded shadow-sm"
-            style={{ top: "80px" }}
-          >
+          <div className="position-sticky" style={{ top: "80px" }}>
             <Sidebar />
           </div>
         </div>

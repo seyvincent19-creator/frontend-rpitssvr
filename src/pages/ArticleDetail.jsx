@@ -99,10 +99,10 @@ const ArticleDetail = () => {
         <Link to="/" className="btn btn-secondary btn-sm mb-3">
           <FaArrowLeft className="me-2" /> Back to Articles
         </Link>
-        <h1 className="mb-3 article-title" style={{ color:"blue", lineHeight:"1.8", fontFamily: "Moul", fontStyle: 'normal'}}>{article.title}</h1>
+        <h1 className="mb-3 article-title" style={{ color: "#1e40af", lineHeight: "1.7", fontFamily: "Siemreap", fontSize: "1.6rem", fontWeight: "700" }}>{article.title}</h1>
         <p className="text-muted small mb-4">
-          Published on: {new Date(article.created_at).toLocaleDateString()} |
-          Views: {article.created_at?.toLocaleString()}
+          Published on: {article.created_at ? new Date(article.created_at).toLocaleDateString("en-GB") : ""}
+          {article.views_count != null && ` | Views: ${article.views_count.toLocaleString()}`}
         </p>
         <img
           src={imageUrl}
@@ -154,7 +154,7 @@ const ArticleDetail = () => {
                     {post.title}
                   </Link>
                   <p className="small text-muted mb-0">
-                    {new Date(post.published_at).toLocaleDateString()}
+                    {post.created_at ? new Date(post.created_at).toLocaleDateString("en-GB") : ""}
                   </p>
                 </li>
               ))}

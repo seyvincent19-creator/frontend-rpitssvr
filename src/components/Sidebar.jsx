@@ -1,49 +1,67 @@
 import React, { useEffect } from "react";
 import "./Sidebar.css";
+import { FaFacebookF } from "react-icons/fa";
 
 const Sidebar = () => {
-useEffect(() => {
-  if (!window.FB || !window.FB.XFBML || !window.FB.XFBML.parse) {
-    ((d, s, id) => {
-      const fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      const js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
-  } else {
-    window.FB.XFBML.parse();
-  }
-}, []);
-
+  useEffect(() => {
+    if (!window.FB || !window.FB.XFBML || !window.FB.XFBML.parse) {
+      ((d, s, id) => {
+        const fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        const js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/km_KH/sdk.js#xfbml=1&version=v17.0";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
+    } else {
+      window.FB.XFBML.parse();
+    }
+  }, []);
 
   return (
-    <div className="p-4 bg-secondary text-white rounded image-slider-container">
-  <h5 className="text-center mb-3">ព័តមានពីហ្វេសប៊ុក</h5>
-  <div id="fb-root"></div>
-  <div className="fb-plugin-wrapper">
-    <div
-      className="fb-page"
-      data-href="https://web.facebook.com/RPITSSVR.Official"
-      data-tabs="timeline"
-      data-width="380"
-      data-height=""
-      data-small-header="false"
-      data-adapt-container-width="true"
-      data-hide-cover="false"
-      data-show-facepile="false"
-    >
-      <blockquote
-        cite="https://web.facebook.com/RPITSSVR.Official"
-        className="fb-xfbml-parse-ignore"
-      >
-        <a href="https://web.facebook.com/RPITSSVR.Official">Facebook</a>
-      </blockquote>
-    </div>
-  </div>
-</div>
+    <div className="sidebar-card">
+      {/* Header */}
+      <div className="sidebar-header">
+        <FaFacebookF className="sidebar-fb-icon" />
+        <span>ព័ត៌មានពីហ្វេសប៊ុក</span>
+      </div>
 
+      {/* Facebook Plugin */}
+      <div className="sidebar-fb-wrapper">
+        <div id="fb-root"></div>
+        <div
+          className="fb-page"
+          data-href="https://web.facebook.com/RPITSSVR.Official"
+          data-tabs="timeline"
+          data-width="320"
+          data-height="400"
+          data-small-header="true"
+          data-adapt-container-width="true"
+          data-hide-cover="false"
+          data-show-facepile="false"
+        >
+          <blockquote
+            cite="https://web.facebook.com/RPITSSVR.Official"
+            className="fb-xfbml-parse-ignore"
+          >
+            <a href="https://web.facebook.com/RPITSSVR.Official">
+              RPITSSVR Official
+            </a>
+          </blockquote>
+        </div>
+      </div>
+
+      {/* Follow Button */}
+      <a
+        href="https://web.facebook.com/RPITSSVR.Official"
+        target="_blank"
+        rel="noreferrer"
+        className="sidebar-follow-btn"
+      >
+        <FaFacebookF style={{ marginRight: "8px" }} />
+        តាមដានទំព័រ
+      </a>
+    </div>
   );
 };
 

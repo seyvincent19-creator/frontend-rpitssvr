@@ -1,49 +1,51 @@
-import React from 'react';
-import 'aos/dist/aos.css';
+import React from "react";
+import { FaRocket, FaGraduationCap, FaBullhorn } from "react-icons/fa";
+import "./AnnouncementSection.css";
 
-const AnnouncementSection = () => {
-  return (
-    <div 
-      className="w-100 text-white py-5" 
-      style={{ background: "linear-gradient(135deg, #1e40af, #0f766e)" }} // Blue → Teal gradient
-      data-aos="fade-up"
-    >
-      <div className="container">
-        <h2 className="mb-4 text-center fw-bold" data-aos="fade-up">
-          📢 Latest Announcements
-        </h2>
+const announcements = [
+  {
+    icon: <FaRocket />,
+    color: "#2563eb",
+    bg: "#eff6ff",
+    label: "New Course",
+    title: "កម្មវិធីបណ្តុះបណ្តាលជំនាញ ១.៥ លាននាក់",
+    desc: "វិទ្យាស្ថានបានបើកការចុះឈ្មោះសិក្សាសម្រាប់កម្មវិធីបណ្តុះបណ្តាលជំនាញវិជ្ជាជីវៈ និងបច្ចេកទេស ១.៥ លាននាក់ ក្នុងគ្រប់ជំនាញឯកទេស",
+  },
+  {
+    icon: <FaGraduationCap />,
+    color: "#0f766e",
+    bg: "#f0fdfa",
+    label: "Scholarship",
+    title: "អាហារូបករណ៍ ១០០% + ប្រាក់ឧបត្ថម្ភ ២៨ម៉ឺនរៀល/ខែ",
+    desc: "យុវជនពីគ្រួសារក្រីក្រ ឬងាយរងហានិភ័យ អាចទទួលបានអាហារូបករណ៍ ១០០% ព្រមទាំងប្រាក់ ២៨ម៉ឺនរៀលក្នុងមួយខែ",
+  },
+];
 
-        <div className="row justify-content-center">
-          <div className="col-md-10 col-lg-8">
-            <div className="bg-white text-dark p-4 rounded shadow">
-              <ul className="list-unstyled mb-0">
+const AnnouncementSection = () => (
+  <section className="announcement-section">
+    <div className="container">
+      <div className="announcement-header">
+        <FaBullhorn className="announcement-icon-header" />
+        <h2 className="announcement-title">ការប្រកាសសំខាន់ៗ</h2>
+        <span className="announcement-badge">Latest News</span>
+      </div>
 
-                <li className="mb-3">
-                  <strong className="text-primary">🚀 New Course:</strong>{" "}
-                  <span 
-                    style={{ fontFamily: "Koulen", color: "#e85d04" }} // Friendly orange
-                  >
-                    កម្មវិធីបណ្តុះបណ្តាលជំនាញវិជ្ជាជីវៈ និងបច្ចេកទេស ១.៥លាននាក់
-                  </span>
-                </li>
-
-                <li className="mb-3">
-                  <strong className="text-success">🎤 Scholarship:</strong>{" "}
-                  <span 
-                    style={{ fontFamily: "Siemreap", color: "#0f766e" }} // Teal green
-                  >
-                    អាហារូបករណ៍ ១០០% ព្រមទាំងទទួលបានប្រាក់ឧបត្ថម្ភ ២៨ម៉ឺនរៀល/ខែ 
-                    ដល់យុវជនមកពីគ្រួសារមានប័ណ្ណក្រីក្រ ឬគ្រួសារងាយរងហានិភ័យ
-                  </span>
-                </li>
-
-              </ul>
+      <div className="announcement-grid">
+        {announcements.map((a, i) => (
+          <div key={i} className="announcement-card">
+            <div className="announcement-card-icon" style={{ background: a.bg, color: a.color }}>
+              {a.icon}
+            </div>
+            <div className="announcement-card-body">
+              <span className="announcement-card-label" style={{ color: a.color }}>{a.label}</span>
+              <h5 className="announcement-card-title">{a.title}</h5>
+              <p className="announcement-card-desc">{a.desc}</p>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
-  );
-};
+  </section>
+);
 
 export default AnnouncementSection;

@@ -1,68 +1,78 @@
 import React from "react";
-import "./ImageSlider.css"; // Custom styles for animation
+import { Link } from "react-router-dom";
+import "./ImageSlider.css";
 
-const img_slider = [
-  { id: 1, path: "/images/img-slide/1.jpg", title: "Welcome to Our Platform", desc: "Discover our amazing features and content" },
-  { id: 2, path: "/images/img-slide/2.jpg", title: "Learn and Grow", desc: "Start your learning journey with us today" },
-  { id: 3, path: "/images/img-slide/3.jpg", title: "Stay Connected", desc: "Follow us on social media for updates" },
+const slides = [
+  {
+    id: 1,
+    path: "/images/img-slide/1.jpg",
+    tag: "ការអប់រំបច្ចេកទេស",
+    title: "បង្កើតអនាគតរបស់អ្នក",
+    titleEn: "Build Your Future With Us",
+    desc: "វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែនស្វាយរៀង ផ្តល់ការបណ្តុះបណ្តាលវិជ្ជាជីវៈគុណភាពខ្ពស់",
+  },
+  {
+    id: 2,
+    path: "/images/img-slide/2.jpg",
+    tag: "អាហារូបករណ៍ ១០០%",
+    title: "ឱកាសសម្រាប់គ្រប់គ្នា",
+    titleEn: "Opportunities For Everyone",
+    desc: "ទទួលបានអាហារូបករណ៍ពេញលេញ និងប្រាក់ឧបត្ថម្ភ ២៨ម៉ឺនរៀល/ខែ សម្រាប់គ្រួសារក្រីក្រ",
+  },
+  {
+    id: 3,
+    path: "/images/img-slide/3.jpg",
+    tag: "ចូលរួមផ្នែកវិស្វកម្ម",
+    title: "ជំនាញដែលពិភពលោកត្រូវការ",
+    titleEn: "Skills The World Needs",
+    desc: "ស្វែងយល់ពីការបណ្តុះបណ្តាលផ្នែកបច្ចេកវិទ្យា ថាមពល និងសំណង់ ៖ ១០ ជំនាញឯកទេស",
+  },
 ];
 
-const ImageSlider = () => {
-  return (
-    <div className="image-slider-container">
-      <div
-        id="mainCarousel"
-        className="carousel slide carousel-fade"
-        data-bs-ride="carousel"
-      >
-        {/* Slides */}
-        <div className="carousel-inner">
-          {img_slider.map((slide, index) => (
-            <div
-              key={slide.id}
-              className={`carousel-item ${index === 0 ? "active" : ""}`}
-            >
-              <img
-                src={slide.path}
-                className="d-block w-100"
-                alt={`Slide ${slide.id}`}
-              />
-              <div className="carousel-caption animate__animated animate__fadeInDown">
-                <h2>{slide.title}</h2>
-                <p>{slide.desc}</p>
-                <a
-                  href="/enroll"
-                  className="btn btn-lg btn-warning mt-3 shadow"
-                >
-                  Enroll Now
-                </a>
+const ImageSlider = () => (
+  <div className="hero-slider">
+    <div id="heroCarousel" className="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+      <div className="carousel-inner">
+        {slides.map((s, i) => (
+          <div key={s.id} className={`carousel-item ${i === 0 ? "active" : ""}`}>
+            <img src={s.path} className="hero-slide-img" alt={s.titleEn} />
+            <div className="hero-overlay" />
+            <div className="hero-caption">
+              <span className="hero-tag">{s.tag}</span>
+              <h1 className="hero-title-kh">{s.title}</h1>
+              <p className="hero-title-en">{s.titleEn}</p>
+              <p className="hero-desc">{s.desc}</p>
+              <div className="hero-btns">
+                <Link to="/enrollment" className="hero-btn-primary">ចុះឈ្មោះឥឡូវ</Link>
+                <Link to="/aboutus" className="hero-btn-secondary">ស្វែងយល់បន្ថែម</Link>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Controls */}
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#mainCarousel"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon" />
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#mainCarousel"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon" />
-          <span className="visually-hidden">Next</span>
-        </button>
+          </div>
+        ))}
       </div>
+
+      {/* Indicators */}
+      <div className="hero-indicators">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            data-bs-target="#heroCarousel"
+            data-bs-slide-to={i}
+            className={i === 0 ? "active" : ""}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      <button className="hero-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span>&#8249;</span>
+      </button>
+      <button className="hero-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span>&#8250;</span>
+      </button>
     </div>
-  );
-};
+  </div>
+);
 
 export default ImageSlider;

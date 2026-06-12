@@ -1,60 +1,229 @@
-/* src/components/NavbarMenu.css */
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Khmer+OS+Kulen&display=swap');
-
-.menu-left {
-  margin-left: 0 !important;
+/* ─── Main Navbar ─────────────────────────────────── */
+.main-navbar {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  transition: box-shadow 0.3s;
+  position: relative;
+  z-index: 100;
+}
+.main-navbar--scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.10);
 }
 
-.navbar-nav .nav-link {
-  font-family: "Koulen", sans-serif;
-  color: white !important;
-  font-size: 18px;
-  margin-right: 15px;
+.main-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 16px;
 }
 
-.navbar-nav .nav-link:hover {
-  text-decoration: underline;
+/* ─── Logo ────────────────────────────────────────── */
+.main-navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
 }
-/* src/components/NavbarMenu.css */
-
-.menu-left .nav-link,
-.dropdown-menu .dropdown-item {
-  font-family: 'Khmer OS Battambang', sans-serif;
-  color: rgb(8, 29, 211);
+.navbar-logo-img {
+  height: 48px;
+  width: auto;
+}
+.navbar-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+.navbar-logo-kh {
+  font-family: "Siemreap", sans-serif;
+  font-size: 11px;
+  color: #1e40af;
+  font-weight: 700;
+  max-width: 260px;
+  line-height: 1.5;
+}
+.navbar-logo-en {
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  max-width: 260px;
 }
 
-.dropdown-menu {
-  background: "linear-gradient(135deg, #1e40af, #0f766e)";  /* same as navbar primary */
+/* ─── Desktop Nav Links ───────────────────────────── */
+.main-nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.main-nav-links li {
+  position: relative;
+}
+
+.nav-item-link {
+  display: inline-block;
+  padding: 8px 11px;
+  font-family: "Koulen", "Siemreap", sans-serif;
+  font-size: 14px;
+  color: #334155;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  background: none;
   border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.nav-item-link:hover {
+  color: #2563eb;
+  background: #eff6ff;
+}
+.nav-item-link.active {
+  color: #2563eb;
+  font-weight: 700;
+  background: #eff6ff;
 }
 
-.dropdown-menu .dropdown-item:hover {
-  background-color: #0b5ed7;
-  color: #fff;
+/* ─── Dropdown ────────────────────────────────────── */
+.nav-dropdown-wrap { position: relative; }
+.nav-dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
-.navbar-brand{
-  font-family: 'Khmer OS Battambang', sans-serif;
-  color: white !important;
-  font-size: 2px;
-  
+.nav-caret {
+  font-size: 10px;
+  transition: transform 0.2s;
+  display: inline-block;
 }
-/* NavbarMenu.css */
+.nav-dropdown-wrap:hover .nav-caret { transform: rotate(180deg); }
 
-/* Hover effect for top-level nav links */
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  background-color: #0056b3; /* darker blue */
-  color: #fff;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 6px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  z-index: 999;
+}
+.nav-dropdown-wrap:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-dropdown-item {
+  display: block;
+  padding: 9px 18px;
+  font-family: "Siemreap", sans-serif;
+  font-size: 14px;
+  color: #334155;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-dropdown-item:hover {
+  background: #eff6ff;
+  color: #2563eb;
 }
 
-/* Hover effect for dropdown items */
-.dropdown-menu .dropdown-item:hover {
-  background-color: #007bff; /* bootstrap primary */
-  color: #fff;
+/* ─── Hamburger ───────────────────────────────────── */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
 }
-.navbar-nav .nav-link:hover {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+.hamburger:hover { background: #f1f5f9; }
+.hamburger-bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #334155;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger-bar.open:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-bar.open:nth-child(2) { opacity: 0; }
+.hamburger-bar.open:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── Mobile Menu ─────────────────────────────────── */
+.mobile-menu {
+  flex-direction: column;
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  padding: 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease, padding 0.2s;
+  display: flex;
+}
+.mobile-menu--open {
+  max-height: 600px;
+  padding: 8px 0 16px;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 11px 20px;
+  font-family: "Koulen", "Siemreap", sans-serif;
+  font-size: 15px;
+  color: #334155;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  background: #eff6ff;
+  color: #2563eb;
+}
+.mobile-dropdown summary {
+  list-style: none;
+  cursor: pointer;
+}
+.mobile-dropdown summary::-webkit-details-marker { display: none; }
+.mobile-nav-sub {
+  display: block;
+  padding: 9px 36px;
+  font-family: "Siemreap", sans-serif;
+  font-size: 13px;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.mobile-nav-sub:hover { color: #2563eb; }
+.mobile-enroll-btn {
+  margin: 10px 20px 0;
+  background: #2563eb;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: "Siemreap", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+.mobile-enroll-btn:hover {
+  background: #1d4ed8;
+  color: #fff;
 }
