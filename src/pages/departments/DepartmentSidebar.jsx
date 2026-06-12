@@ -12,7 +12,7 @@ const DepartmentSidebar = () => {
   ];
 
   return (
-    <div className="electric-sidebar bg-light p-3 rounded shadow-sm">
+    <div className="electric-sidebar bg-light p-3 rounded shadow-sm d-none d-md-block">
       <h5 className="text-center mb-3" style={{ fontFamily: "'Siemreap', sans-serif" , fontSize: "1.5rem" , color: "rgba(255, 51, 177, 1)"}}>បណ្តុះបណ្តាលលើជំនាញបច្ចេកទេស</h5>
       {bannerImages.map((src, index) => (
         <div key={index} className="mb-3">
