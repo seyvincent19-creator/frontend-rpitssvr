@@ -41,7 +41,7 @@ const Footer = () => (
             <h5 className="footer-col-title">ទំនាក់ទំនង</h5>
             <ul className="footer-contact-list">
               <li><FaEnvelope /><a href="mailto:info@rpisvr.edu.kh">info@rpisvr.edu.kh</a></li>
-              <li><FaPhone /><a href="tel:+855953233">+855 953 2333</a></li>
+              <li><FaPhone /><a href="tel:+85588953 2333">+85588 953 2 333</a></li>
               <li><FaMapMarkerAlt /><span>ភូមិមេភ្លើង សង្កាត់ស្វាយរៀង ក្រុងស្វាយរៀង ខេត្តស្វាយរៀង</span></li>
             </ul>
           </div>
