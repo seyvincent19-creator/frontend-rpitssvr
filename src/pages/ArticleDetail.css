@@ -1,5 +1,22 @@
-/* .article-title {
+/* Article content images - make all responsive and properly fitted */
+.article-body img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 12px 0;
+  display: block;
+}
+
+/* Article content general styles */
+.article-body {
   font-family: "Siemreap", sans-serif;
-  font-size: 14px;
-  line-height: 1.8 !important;
-} */
+  font-size: 15px;
+  line-height: 2;
+  color: #334155;
+}
+
+.article-body p {
+  margin-bottom: 12px;
+}

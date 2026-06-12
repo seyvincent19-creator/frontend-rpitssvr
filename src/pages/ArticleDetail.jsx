@@ -112,7 +112,7 @@ const ArticleDetail = () => {
         />
 
         <div
-          className="mb-5 article-title" style={{ lineHeight: "2" }}
+          className="mb-5 article-body"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
