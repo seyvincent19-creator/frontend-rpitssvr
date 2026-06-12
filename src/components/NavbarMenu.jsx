@@ -6,7 +6,7 @@ const DEPARTMENTS = [
   { id: 1, name: "វិទ្យាសាស្រ្តកុំព្យូទ័រ" },
   { id: 2, name: "អគ្គិសនី" },
   { id: 3, name: "មេកាត្រូនិក" },
-  { id: 4, name: "មេកានិកឧស្សាហកម្ម" },
+  { id: 4, name: "មេកានិកទំនាក់ទំនងឧស្សាហកម្ម" },
   { id: 5, name: "អេឡិចត្រូនិច" },
   { id: 6, name: "មេកានិករថយន្ត" },
   { id: 7, name: "សំណង់ស៊ីវិល" },
@@ -53,7 +53,7 @@ const NavbarMenu = () => {
             </div>
           </li>
 
-          <li><NavLink to="/communication" className={({ isActive }) => isActive ? "nav-item-link active" : "nav-item-link"}>ឧស្សាហកម្ម</NavLink></li>
+          <li><NavLink to="/communication" className={({ isActive }) => isActive ? "nav-item-link active" : "nav-item-link"}>ទំនាក់ទំនងឧស្សាហកម្ម</NavLink></li>
           <li><NavLink to="/e-library" className={({ isActive }) => isActive ? "nav-item-link active" : "nav-item-link"}>E-Library</NavLink></li>
           <li><NavLink to="/structure" className={({ isActive }) => isActive ? "nav-item-link active" : "nav-item-link"}>រចនាសម្ព័ន្ធ</NavLink></li>
           <li><NavLink to="/aboutus" className={({ isActive }) => isActive ? "nav-item-link active" : "nav-item-link"}>អំពីយើង</NavLink></li>
@@ -77,7 +77,7 @@ const NavbarMenu = () => {
             <Link key={d.id} to={`/department/${d.id}`} className="mobile-nav-sub" onClick={() => setMenuOpen(false)}>{d.name}</Link>
           ))}
         </details>
-        <NavLink to="/communication" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>ឧស្សាហកម្ម</NavLink>
+        <NavLink to="/communication" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>ទំនាក់ទំនងឧស្សាហកម្ម</NavLink>
         <NavLink to="/e-library" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>E-Library</NavLink>
         <NavLink to="/structure" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>រចនាសម្ព័ន្ធ</NavLink>
         <NavLink to="/aboutus" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>អំពីយើង</NavLink>
