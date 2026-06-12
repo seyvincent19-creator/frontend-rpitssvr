@@ -5,7 +5,7 @@ import "./ImageSlider.css";
 const slides = [
   {
     id: 1,
-    path: "/images/img-slide/1.jpg",
+    path: "/images/img-slide/slide1.jpg",
     tag: "ការអប់រំបច្ចេកទេស",
     title: "បង្កើតអនាគតរបស់អ្នក",
     titleEn: "Build Your Future With Us",
