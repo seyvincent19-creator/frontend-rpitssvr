@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FaRocket, FaGraduationCap, FaBullhorn, FaTimes, FaSearchPlus } from "react-icons/fa";
+import React, { useState, useEffect, useCallback } from "react";
+import { FaRocket, FaGraduationCap, FaBullhorn, FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./AnnouncementSection.css";
 
 const announcements = [
@@ -9,22 +9,42 @@ const announcements = [
     bg: "#eff6ff",
     label: "New Course",
     title: "កម្មវិធីបណ្តុះបណ្តាលជំនាញ ១.៥ លាននាក់",
-    desc: "វិទ្យាស្ថានបានបើកការចុះឈ្មោះសិក្សាសម្រាប់កម្មវិធីបណ្តុះបណ្តាលជំនាញវិជ្ជាជីវៈ និងបច្ចេកទេស ១.៥ លាននាក់ ក្នុងគ្រប់ជំនាញឯកទេស",
-    leaflet: "/images/leaflet-course.jpg",
+    desc: "អាហារូបករណ៍ ១០០% សម្រាប់យុវជនមកពីគ្រួសារក្រីក្រ ឬងាយរងហានិភ័យ + ប្រាក់ឧបត្ថម្ភប ២៨ម៉ឺនរៀល/ខែ",
+    leaflets: [
+      "/images/img-leaflet1.5m/front.jpg",
+      "/images/img-leaflet1.5m/back.jpg",
+    ],
+    slideLabels: ["ខាងមុខ", "ខាងក្រោយ"],
   },
   {
     icon: <FaGraduationCap />,
     color: "#0f766e",
     bg: "#f0fdfa",
     label: "Scholarship",
-    title: "អាហារូបករណ៍ ១០០% + ប្រាក់ឧបត្ថម្ភ ២៨ម៉ឺនរៀល/ខែ",
-    desc: "យុវជនពីគ្រួសារក្រីក្រ ឬងាយរងហានិភ័យ អាចទទួលបានអាហារូបករណ៍ ១០០% ព្រមទាំងប្រាក់ ២៨ម៉ឺនរៀលក្នុងមួយខែ",
-    leaflet: "/images/leaflet-scholarship.jpg",
+    title: "អាហារូបករណ៍ ១០០% សម្រាប់កម្រិតសសញ្ញាបត្រជាន់ខ្ពស់បច្ចេកទេស ឬបរិញ្ញាបត្ររង",
+    desc: "លក្ខខណ្ឌសិក្សា៖ សិស្សប្រឡងជាប់ ឬធ្លាក់សញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ(បាក់ឌុប) ឬសញ្ញាបត្រសមមូល ឬសញ្ញាបត្របច្ចេកទេស និងវិជ្ជាជីវៈ​ ៣",
+    leaflets: [
+      "/images/img-leaflet-longcourse/long-course-front.jpg",
+      "/images/img-leaflet-longcourse/long-course-back.jpg",
+    ],
+    slideLabels: ["ខាងមុខ", "ខាងក្រោយ"],
   },
 ];
 
 const LeafletModal = ({ item, onClose }) => {
-  // Close on Escape key
+  const [current, setCurrent] = useState(0);
+  const total = item.leaflets.length;
+
+  const next = useCallback(() => setCurrent((c) => (c + 1) % total), [total]);
+  const prev = () => setCurrent((c) => (c - 1 + total) % total);
+
+  // Auto-advance every 3 seconds
+  useEffect(() => {
+    const timer = setInterval(next, 3000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  // Close on Escape, lock scroll
   useEffect(() => {
     const handler = (e) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", handler);
@@ -38,43 +58,61 @@ const LeafletModal = ({ item, onClose }) => {
   return (
     <div className="leaflet-overlay" onClick={onClose}>
       <div className="leaflet-modal" onClick={(e) => e.stopPropagation()}>
+
         {/* Header */}
-        <div className="leaflet-modal-header" style={{ borderColor: item.color }}>
+        <div className="leaflet-modal-header" style={{ borderBottomColor: item.color }}>
           <div className="leaflet-modal-label" style={{ color: item.color, background: item.bg }}>
-            <span style={{ marginRight: 6 }}>{item.icon}</span>
+            <span className="leaflet-label-icon">{item.icon}</span>
             {item.label}
           </div>
-          <button className="leaflet-close-btn" onClick={onClose} aria-label="Close">
-            <FaTimes />
+          <div className="leaflet-header-right">
+            <span className="leaflet-slide-label" style={{ color: item.color }}>
+              {item.slideLabels?.[current] ?? `${current + 1} / ${total}`}
+            </span>
+            <button className="leaflet-close-btn" onClick={onClose} aria-label="Close">
+              <FaTimes />
+            </button>
+          </div>
+        </div>
+
+        {/* Slideshow */}
+        <div className="leaflet-slideshow">
+          {item.leaflets.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`${item.label} ${i + 1}`}
+              className={`leaflet-slide-img ${i === current ? "leaflet-slide-img--active" : ""}`}
+            />
+          ))}
+
+          {/* Prev / Next arrows */}
+          <button className="leaflet-arrow leaflet-arrow--left" onClick={prev} aria-label="Previous">
+            <FaChevronLeft />
+          </button>
+          <button className="leaflet-arrow leaflet-arrow--right" onClick={next} aria-label="Next">
+            <FaChevronRight />
           </button>
         </div>
 
-        {/* Image */}
-        <div className="leaflet-img-wrap">
-          <img
-            src={item.leaflet}
-            alt={item.label}
-            className="leaflet-img"
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-              e.currentTarget.nextSibling.style.display = "flex";
-            }}
-          />
-          <div className="leaflet-img-fallback" style={{ display: "none" }}>
-            <FaSearchPlus size={40} color="#cbd5e1" />
-            <p style={{ fontFamily: "Siemreap, sans-serif", color: "#94a3b8", marginTop: 12 }}>
-              រូបភាព Leaflet មិនទាន់មានទេ
-            </p>
-            <small style={{ color: "#cbd5e1" }}>{item.leaflet}</small>
-          </div>
+        {/* Dot indicators */}
+        <div className="leaflet-dots">
+          {item.leaflets.map((_, i) => (
+            <button
+              key={i}
+              className={`leaflet-dot ${i === current ? "leaflet-dot--active" : ""}`}
+              style={{ background: i === current ? item.color : undefined }}
+              onClick={() => setCurrent(i)}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
         </div>
 
         {/* Title */}
         <div className="leaflet-modal-footer">
-          <p style={{ fontFamily: "Siemreap, sans-serif", fontSize: 14, color: "#334155", margin: 0 }}>
-            {item.title}
-          </p>
+          <p className="leaflet-footer-title">{item.title}</p>
         </div>
+
       </div>
     </div>
   );
