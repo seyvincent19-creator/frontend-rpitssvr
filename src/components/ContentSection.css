@@ -17,7 +17,7 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.09);
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.2s;
@@ -58,7 +58,7 @@
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 1px 6px rgba(0,0,0,0.08);
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: row;
   transition: box-shadow 0.2s;
@@ -73,6 +73,7 @@
   min-width: 110px;
   overflow: hidden;
   display: block;
+  border-radius: 10px 0 0 10px;
 }
 .small-card-img {
   width: 100%;

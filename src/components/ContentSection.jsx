@@ -16,10 +16,12 @@ const ShareDropdown = ({ item }) => (
       className="btn btn-sm btn-outline-secondary dropdown-toggle"
       type="button"
       data-bs-toggle="dropdown"
+      data-bs-boundary="viewport"
+      data-bs-strategy="fixed"
     >
       <FaShareAlt />
     </button>
-    <ul className="dropdown-menu dropdown-menu-end">
+    <ul className="dropdown-menu dropdown-menu-end" style={{ zIndex: 9999, position: "fixed" }}>
       <li>
         <a
           className="dropdown-item"
