@@ -9,7 +9,7 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      <PopupImage />
+      {/* <PopupImage /> */}
       <Outlet />
       <Footer />
     </>

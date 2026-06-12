@@ -40,7 +40,7 @@ function Layout({ children }) {
   return (
     <>
       {!hideNavbar && <Navbar />}
-      <PopupImage />
+      {/* <PopupImage /> */}
       {children}
       <Footer />
     </>
