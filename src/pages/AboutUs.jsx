@@ -1,6 +1,7 @@
 import React from "react";
-import DepartmentSidebar from "./departments/DepartmentSidebar"; // Import the sidebar component
+import DepartmentSidebar from "./departments/DepartmentSidebar";
 import SectionMOU from "../components/SectionMOU";
+import { useLanguage } from "../context/LanguageContext";
 
 const img_about1 = [
   { id: 1, path: "/images/img-aboutus/s1.jpg" },
@@ -16,84 +17,53 @@ const img_about1 = [
 ];
 
 const About = () => {
+  const { t, lang } = useLanguage();
+  const kh = lang === 'kh' ? { fontFamily: "Siemreap" } : {};
+
   return (
     <div className="container my-4">
       <div className="row">
-        {/* Main Content */}
         <div className="col-md-8">
-          <h1 className="khmer-title mb-3">
-            អំពីវិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែន ស្វាយរៀង
-          </h1>
-          <p className="lead" style={{ color: "#2980b9" ,fontFamily: "Siemreap"}}>
-              វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែនស្វាយរៀង បានប្រែក្លាយមកពីមជ្ឈមណ្ឌលបណ្តុះ
-បណ្តាលវិជ្ជាជីវៈខេត្តស្វាយរៀង។ ហើយមជ្ឈមណ្ឌលបណ្តុះបណ្តាលវិជ្ជាជីវៈខេត្តស្វាយរៀង ត្រូវបានសាង
-សង់ក្រោមគម្រោងថវិកាឥណទានធនាគារអភិវឌ្ឍន៍អាស៊ី ADB Loan No. 1368-CAM (SF) ដែលមានអគារ សិក្សាជាន់ផ្ទាល់ដីចំនួន២ខ្នង និងបានដាក់ឱ្យប្រើប្រាស់ជាផ្លូវការនៅថ្ងៃទី១១ ខែមិថុនា ឆ្នាំ២០០១ ដោយ ច្បាប់បង្កើតគ្រឹះស្ថានសិក្សា (១)ប្រកាសលេខ៤២០ អយក.ប្រក ចុះថ្ងៃទី១១ ខែមិថុនា ឆ្នាំ២០០១ ស្តីពីការ បង្កើតមជ្ឈមណ្ឌលបណ្តុះបណ្តាលវិជ្ជាជីវៈខេត្តស្វាយរៀង សិ្ថតក្រោមឱវាទក្រសួងអប់រំ យុវជន និងកីឡា។ (២)អនុក្រិតលេខ៣៨ អនក្រ.បក ចុះថ្ងៃទី១៦ ខែសីហា ឆ្នាំ២០០៤ ស្តីពីការផ្ទេរក្របខណ្ឌមន្ត្រីរាជការ ស៊ីវិលរបស់ក្រសួងអប់រំយុវជន និងកីឡា ក្រសួងកសិកម្ម រុក្ខាប្រម៉ាញ់ និងនេសាទ ក្រសួងសាធារណការ និងដឹកជញ្ជូន  និងអតីតក្រសួងសង្គមកិច្ចការងារបណ្តុះបណ្តាលវិជ្ជាជីវៈ និងយុវនីតិសម្បទា ឱ្យមកស្ថិតនៅ បម្រើការងារក្រោមក្រសួងការងារ និងបណ្តុះបណ្តាលវិជ្ជាជីវៈ។ (៣)អនុក្រិតលេខ៣៤ អនក្រ.បក ចុះថ្ងៃទី០៣ ខែសីហា ឆ្នាំ២០០៤ ស្តីពីការផ្ទេរអាគារ ចលនទ្រព្យ អចលនទ្រព្យ និងឯកសារពាក់ព័ន្ធនៃអតីត ក្រសួងសង្គមកិច្ច ការងារបណ្តុះបណ្តាលវិជ្ជាជីវៈ និងយុវនីតិ សម្បទា ឱ្យមកក្រោមការគ្រប់គ្រងរបស់ ក្រសួងការងារ និងបណ្តុះបណ្តាលវិជ្ជាជីវៈ។
-វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែនស្វាយរៀង ហៅកាត់ថា“ វ.ព.ភ.ត.ស.ស្វ.រ ” និងជាភាសាអង់គ្លេសថា Regional Polytechnic Institute Techo Sen Svay Rieng ហៅកាត់ថា “R.P.I.T.S.S.R” មានទីតាំងស្ថិតនៅផ្លូវលេខ២០៣ ភូមិមេភ្លើង សង្កាត់ស្វាយរៀង ក្រុងស្វាយរៀង ខេត្តស្វាយរៀង ហើយត្រូវបានតែងតាំងដោយ អនុក្រឹត្យលេខ១១៩ អនក្រ.បក ចុះថ្ងៃទី១៧ ខែមីនា ឆ្នាំ២០១៤ របស់រាជរដ្ឋាភិបាលកម្ពុជា ស្តីពីការប្រែក្លាយមជ្ឈមណ្ឌលបណ្តុះបណ្តាលវិជ្ជាជីវៈខេត្តស្វាយរៀង ឱ្យទៅជា វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែនស្វាយរៀង។
+          <h1 className="khmer-title mb-3" style={kh}>{t('about_title')}</h1>
 
-
-          </p>
-          <h5 className="mb-2 khmer-title">ចក្ខុវិស័យ</h5>
-          <p className="mb-3" style={{ fontFamily: "Siemreap"}}>
-            វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែនស្វាយរៀង ជាស្ថាប័នរដ្ឋដែលចូលរួមចំណែកអភិវឌ្ឍ វិស័យអប់រំបណ្ដុះបណ្ដាលបច្ចេកទេស និងវិជ្ជាជីវៈ តាមរយៈការផ្ដល់សេវាជំនាញបណ្ដុះបណ្ដាលបច្ចេកទេស និងវិជ្ជាជីវៈជូនប្រជាពលរដ្ឋប្រកបដោយសមត្ថភាព គុណភាព និងសមធម៌ ។
-          </p>
-          <h5 className="mb-2 khmer-title">បេសកកម្ម</h5>
-          <p className="mb-3" style={{ fontFamily: "Siemreap"}}>
-            វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែនស្វាយរៀង មានបេសកកម្មសំខាន់ក្នុងការសម្របសម្រួល គ្រប់គ្រង និងផ្តល់សេវាបណ្តុះបណ្តាលជំនាញបច្ចេកទេស និងវិជ្ជាជីវៈក្នុងរយៈពេលខ្លី មធ្យម និងវែងស្រប ទៅនឹងតម្រូវការទីផ្សារការងារក្នុងស្រុក និងក្រៅប្រទេស។
+          <p className="lead" style={{ color: "#2980b9", ...kh }}>
+            {t('about_history')}
           </p>
 
-          
+          <h5 className="mb-2 khmer-title" style={kh}>{t('about_vision_title')}</h5>
+          <p className="mb-3" style={kh}>{t('about_vision')}</p>
 
-          <h5 className="mb-2 khmer-title">តួនាទីសំខាន់ៗ</h5>
+          <h5 className="mb-2 khmer-title" style={kh}>{t('about_mission_title')}</h5>
+          <p className="mb-3" style={kh}>{t('about_mission')}</p>
+
+          <h5 className="mb-2 khmer-title" style={kh}>{t('about_roles_title')}</h5>
           <ul className="mb-3">
-            <li style={{ fontFamily: "Siemreap"}}>អភិវឌ្ឍនិងអនុវត្តគោលនយោបាយផែនការយុទ្ធសាស្ត្រនិងលិខិតបទដ្ឋានគតិយុត្តិ សម្រាប់វិស័យ អប់រំបណ្តុះបណ្តាលបច្ចេកទេស និងវិជ្ជាជីវៈ និងគោរពតាមគោលការណ៍ណែនាំរបស់រដ្ឋបាល ខេត្តស្វាយរៀង។</li>
-            <li style={{ fontFamily: "Siemreap"}}>ប្រមូលចងក្រង វិភាគ និងសិក្សាពីតម្រូវការជំនាញអាទិភាពក្នុងខេត្តស្វាយរៀង។</li>
-            <li style={{ fontFamily: "Siemreap"}}>អភិវឌ្ឍកម្មវិធីសិក្សា និងមេរៀនសម្រាប់ការបង្រៀន និងរៀន និងចូលរួមអនុវត្តប្រព័ន្ធវាយតម្លៃផ្អែក លើសមត្ថភាពស្របតាមគុណវុឌ្ឍិជាតិ។</li>
-            <li style={{ fontFamily: "Siemreap"}}>ពង្រឹង និងពង្រីកកម្មវិធីបណ្តុះបណ្តាលចាប់ពីកម្រិតវិញ្ញាបនបត្រដល់កម្រិតបរិញ្ញាបត្រ ដើម្បីគាំទ្រ គោលនយោបាយ អភិវឌ្ឍន៍សេដ្ឋកិច្ច និងសង្គម។</li>
-            <li style={{ fontFamily: "Siemreap"}}>ពង្រឹង និងពង្រីកការផ្សព្វផ្សាយវិស័យអប់រំបណ្តុះបណ្តាលបច្ចេកទេស និងវិជ្ជាជីវៈ។</li>
-            <li style={{ fontFamily: "Siemreap"}}>អភិវឌ្ឍ និងអនុវត្តកម្មវិធីទស្សនកិច្ចសិក្សា កម្មសិក្សា ហាត់ការ និងការងារ សម្រាប់សិស្សនិស្សិត គ្រប់កម្រិត។</li>
-            <li style={{ fontFamily: "Siemreap"}}>ពង្រឹង និងពង្រីកភាពជាដៃគូរវាងរដ្ឋ និងឯកជន ដៃគូអភិវឌ្ឍន៍ ដើម្បីធានាគុណភាពនៃកម្មវិធី បណ្តុះបណ្តាល។</li>
-            <li style={{ fontFamily: "Siemreap"}}>ជំរុញការស្រាវជ្រាវ នវានុវត្តន៍ និងបច្ចេកវិទ្យាអនុវត្ត និងការប្រកួតប្រជែងជំនាញ។</li>
-            <li style={{ fontFamily: "Siemreap"}}>ពង្រឹងគុណភាពវិស័យអប់រំបណ្តុះបណ្តាលបច្ចេកទេស និងវិជ្ជាជីវៈ នៅវិទ្យាស្ថានពហុបច្ចេកទេស ភូមិភាគតេជោសែនស្វាយរៀង។</li>
-            <li style={{ fontFamily: "Siemreap"}}>ពង្រឹងប្រព័ន្ធអភិបាលកិច្ច ការដឹកនាំ ការគ្រប់គ្រង វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែន ស្វាយរៀង។</li>
+            {t('about_roles').map((role, i) => (
+              <li key={i} style={kh}>{role}</li>
+            ))}
           </ul>
 
-          <h5 className="mb-2 khmer-title">វិស័យសិក្សា</h5>
+          <h5 className="mb-2 khmer-title" style={kh}>{t('about_fields_title')}</h5>
           <ul className="mb-3">
-            <li style={{ fontFamily: "Siemreap"}}>វិទ្យាសាស្រ្តកុំព្យូទ័រ</li>
-            <li style={{ fontFamily: "Siemreap"}}>អគ្គិសនី</li>
-            <li style={{ fontFamily: "Siemreap"}}>មេកាត្រូនិក</li>
-            <li style={{ fontFamily: "Siemreap"}}>មេកានិកឧស្សាហកម្ម</li>
-            <li style={{ fontFamily: "Siemreap"}}>អេឡិចត្រូនិក</li>
-            <li style={{ fontFamily: "Siemreap"}}>មេកានិករថយន្ត</li>
-            <li style={{ fontFamily: "Siemreap"}}>សំណង់ស៊ីវិល</li>
-            <li style={{ fontFamily: "Siemreap"}}>ជំនាញបរិក្ខាត្រជាក់</li>
-            <li style={{ fontFamily: "Siemreap"}}>អក្សរសាស្រ្តអង់គ្លេស</li>
-            <li style={{ fontFamily: "Siemreap"}}>គណនេយ្យ និងហិរញ្ញវត្ថុ</li>
+            {t('about_fields').map((field, i) => (
+              <li key={i} style={kh}>{field}</li>
+            ))}
           </ul>
 
-          
-
-          {/* Image Gallery */}
-          <h5 className="mb-3">រូបភាពសាលា</h5>
+          <h5 className="mb-3" style={kh}>{t('about_gallery_title')}</h5>
           <div className="row g-3">
             {img_about1.map((image) => (
               <div className="col-6 col-md-4" key={image.id}>
-                <img
-                  src={image.path}
-                  alt={`Campus ${image.id}`}
-                  className="img-fluid rounded shadow-sm"
-                />
+                <img src={image.path} alt={`Campus ${image.id}`} className="img-fluid rounded shadow-sm" />
               </div>
             ))}
           </div>
-          {/* mou section */}
+
           <div className="mt-2">
             <SectionMOU />
           </div>
-          
         </div>
 
-        {/* Sidebar */}
         <div className="col-md-4">
           <DepartmentSidebar />
         </div>
