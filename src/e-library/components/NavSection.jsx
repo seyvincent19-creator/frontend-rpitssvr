@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Moon, Sun, Globe } from "lucide-react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+import "../ELibraryUI.css";
 
 const categories = [
-  { id: 1, title: "E-Book", icon: "📚" },
-  { id: 2, title: "Thesis", icon: "🎓" },
-  { id: 6, title: "Videos", icon: "🎥" },
+  { id: 1, slug: "e-book",  label: "E-Book",  icon: "📚", cls: "elib-cat-chip--ebook",  href: null },
+  { id: 2, slug: "thesis",  label: "Thesis",  icon: "🎓", cls: "elib-cat-chip--thesis", href: null },
+  { id: 3, slug: "videos",  label: "Videos",  icon: "🎥", cls: "elib-cat-chip--video",  href: "https://www.youtube.com/@RPITSSR/videos" },
 ];
 
 const majors = [
@@ -22,233 +23,104 @@ const majors = [
   "គណនេយ្យ និងហិរញ្ញវត្ថុ",
 ];
 
-// Props: selectedMajor, onMajorChange, searchText, onSearchTextChange
-const NavSection = ({
-  selectedMajor,
-  onMajorChange,
-  searchText,
-  onSearchTextChange,
-}) => {
+const NavSection = ({ selectedMajor, onMajorChange, searchText, onSearchTextChange }) => {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleTheme = () => {
-    setDarkMode((prev) => !prev);
-    if (!darkMode) {
-      document.body.classList.add("dark-theme");
-    } else {
-      document.body.classList.remove("dark-theme");
-    }
+    const next = !darkMode;
+    setDarkMode(next);
+    document.body.classList.toggle("dark-theme", next);
   };
 
   return (
-    <div>
-      <nav
-        className="navbar navbar-dark"
-        style={{
-          backgroundImage: "url('/images/banner-e-library.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          width: "100%",
-          height: "350px",
-          alignItems: "flex-start",
-          position: "relative",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.3), rgba(0,0,0,0.1))",
-            zIndex: 1,
-          }}
-        ></div>
-        <div
-          className="container d-flex flex-column flex-lg-row justify-content-between pt-2"
-          style={{ zIndex: 2 }}
-        >
-          <div className="d-flex align-items-center mb-2 mb-lg-0 text-white">
-            <img
-              src="/images/PRIT.png"
-              alt="RPITSSR Logo"
-              style={{ height: "80px" }}
-              className="me-3"
-            />
+    <>
+      {/* ── Hero ── */}
+      <div className="elib-hero">
+        <div className="elib-hero-overlay" />
+
+        {/* Top row: logo + nav */}
+        <div className="elib-hero-top container">
+          <div className="elib-hero-brand">
+            <img src="/images/PRIT.png" alt="RPITSSR Logo" className="elib-hero-logo" />
             <div>
-              <h1
-                style={{
-                  fontFamily: "'Khmer OS Muol', sans-serif",
-                  fontSize: "22px",
-                  margin: 0,
-                  textShadow: "1px 1px 3px rgba(0,0,0,0.7)",
-                }}
-              >
-                បណ្ណាល័យអេឡិចត្រូនិក
-              </h1>
-              <h2
-                style={{
-                  fontSize: "15px",
-                  margin: 0,
-                  textShadow: "1px 1px 3px rgba(0,0,0,0.7)",
-                }}
-              >
-                RPITSSR E-Library
-              </h2>
+              <h1 className="elib-hero-title">បណ្ណាល័យអេឡិចត្រូនិក</h1>
+              <p className="elib-hero-subtitle">RPITSSVR Digital Library</p>
             </div>
           </div>
-          <ul className="navbar-nav flex-row ms-lg-auto align-items-center bg-transparent text-white">
-            <li className="nav-item mx-2">
-              <Link className="nav-link text-white" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item mx-2">
-              <Link
-                className="nav-link text-white"
-                to="/e-library/see-all/e-book"
-              >
-                E-book
-              </Link>
-            </li>
-            <li className="nav-item mx-2">
-              <Link
-                className="nav-link text-white"
-                to="/e-library/see-all/thesis"
-              >
-                Thesis
-              </Link>
-            </li>
-            <li className="nav-item mx-2">
-              <button
-                className="btn btn-link nav-link text-white p-0"
-                onClick={toggleTheme}
-                aria-label="Toggle dark mode"
-              >
-                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-            </li>
-            <li className="nav-item dropdown mx-2">
-              <a
-                className="nav-link dropdown-toggle d-flex align-items-center text-white"
-                href="#"
-                id="langDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <Globe size={18} />
-              </a>
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="langDropdown"
-              >
-                <li>
-                  <a
-                    className="dropdown-item d-flex align-items-center"
-                    href="#"
-                  >
-                    <span style={{ fontSize: 20, marginRight: 8 }}>🇰🇭</span>
-                    Khmer
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item d-flex align-items-center"
-                    href="#"
-                  >
-                    <span style={{ fontSize: 20, marginRight: 8 }}>🇬🇧</span>
-                    English
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+
+          <nav className="elib-hero-nav">
+            <Link className="elib-nav-link" to="/">Home</Link>
+            <Link className="elib-nav-link" to="/e-library/see-all/e-book">E-Book</Link>
+            <Link className="elib-nav-link" to="/e-library/see-all/thesis">Thesis</Link>
+            <button
+              className="elib-nav-link"
+              style={{ background: "none", border: "none", cursor: "pointer" }}
+              onClick={toggleTheme}
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          </nav>
         </div>
-      </nav>
 
-      {/* Filter row: select + search input side by side */}
-      <div
-        className="py-3"
-        style={{
-          background: "linear-gradient(135deg, #1e40af, #0f766e)",
-        }}
-      >
-        <div className="container">
-          <div className="row g-2 align-items-center justify-content-center">
-            <div className="col-12 col-md-auto">
-              <select
-                className="form-select w-100"
-                value={selectedMajor}
-                onChange={(e) => onMajorChange(e.target.value)}
-              >
-                <option value="">All skills</option>
-                {majors.map((m) => (
-                  <option key={m} value={m}>
-                    {m}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="col-12 col-md flex-grow-1">
+        {/* Bottom: search */}
+        <div className="elib-hero-bottom container">
+          <div className="elib-search-bar">
+            <div className="elib-search-wrap">
+              <FaSearch className="elib-search-icon" />
               <input
                 type="text"
-                className="form-control w-100"
-                placeholder="Search ebook title or author..."
+                className="elib-search-input"
+                placeholder="ស្វែងរកឈ្មោះសៀវភៅ ឬអ្នកនិពន្ធ..."
                 value={searchText}
                 onChange={(e) => onSearchTextChange(e.target.value)}
               />
             </div>
+            <select
+              className="elib-search-select"
+              value={selectedMajor}
+              onChange={(e) => onMajorChange(e.target.value)}
+            >
+              <option value="">ជំនាញទាំងអស់</option>
+              {majors.map((m) => (
+                <option key={m} value={m}>{m}</option>
+              ))}
+            </select>
           </div>
         </div>
       </div>
 
-      {/* Category Cards */}
-      <div className="container text-center py-4">
-        <div className="row row-cols-2 row-cols-sm-3 row-cols-md-6 g-3">
-          {categories.map((cat) => {
-            const slug = cat.title.toLowerCase().replace(/\s+/g, "-");
-
-            if (cat.title === "Videos") {
-              return (
-                <div key={cat.id} className="col">
-                  <div className="category-card h-100">
-                    <a
-                      href="https://www.youtube.com/@RPITSSR/videos"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none", color: "inherit" }}
-                      className="d-flex flex-column align-items-center"
-                    >
-                      <div style={{ fontSize: 24 }}>{cat.icon}</div>
-                      <p className="mb-0 mt-2">{cat.title}</p>
-                    </a>
-                  </div>
-                </div>
-              );
-            }
-
-            return (
-              <div key={cat.id} className="col">
-                <div className="category-card h-100">
-                  <Link
-                    to={`/e-library/see-all/${slug}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    className="d-flex flex-column align-items-center"
-                  >
-                    <div style={{ fontSize: 24 }}>{cat.icon}</div>
-                    <p className="mb-0 mt-2">{cat.title}</p>
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
+      {/* ── Category Chips ── */}
+      <div className="elib-categories">
+        <div className="container">
+          <div className="elib-cat-list">
+            {categories.map((cat) =>
+              cat.href ? (
+                <a
+                  key={cat.id}
+                  href={cat.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`elib-cat-chip ${cat.cls}`}
+                >
+                  <span className="elib-cat-icon">{cat.icon}</span>
+                  {cat.label}
+                </a>
+              ) : (
+                <Link
+                  key={cat.id}
+                  to={`/e-library/see-all/${cat.slug}`}
+                  className={`elib-cat-chip ${cat.cls}`}
+                >
+                  <span className="elib-cat-icon">{cat.icon}</span>
+                  {cat.label}
+                </Link>
+              )
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

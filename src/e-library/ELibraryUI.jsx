@@ -1,71 +1,48 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "aos/dist/aos.css";
 import AOS from "aos";
+import "aos/dist/aos.css";
 import "./ELibraryUI.css";
 import { Link } from "react-router-dom";
 import NavSection from "./components/NavSection";
 
-// Localhost API endpoints
-// const API_EBOOKS = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/ebooks";
-// const API_THESES = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/thesis";
-// Server API endpoints
- const API_EBOOKS = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/ebooks";
- const API_THESES = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/thesis";
-// Public disk base URL (after `php artisan storage:link`)
+const API_EBOOKS = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/ebooks";
+const API_THESES = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/thesis";
 const BASE_STORAGE_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/storage/";
 
 export default function ELibraryUI() {
   const [ebooks, setEbooks] = useState([]);
   const [thesis, setThesis] = useState([]);
-  const [selectedMajor, setSelectedMajor] = useState(""); // skill/category
-  const [searchText, setSearchText] = useState(""); // live text search
+  const [selectedMajor, setSelectedMajor] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    AOS.init({ duration: 700, once: true });
   }, []);
 
-  // Fetch ebooks whenever major or text changes
   useEffect(() => {
     const controller = new AbortController();
     const params = new URLSearchParams();
-
-    if (selectedMajor) {
-      params.append("category", selectedMajor); // Laravel index() reads category
-    }
-
-    if (searchText.trim() !== "") {
-      params.append("q", searchText.trim());
-    }
-
-    const url =
-      API_EBOOKS + (params.toString() ? `?${params.toString()}` : "");
+    if (selectedMajor) params.append("category", selectedMajor);
+    if (searchText.trim()) params.append("q", searchText.trim());
+    const url = API_EBOOKS + (params.toString() ? `?${params.toString()}` : "");
 
     fetch(url, { signal: controller.signal })
-      .then((res) => res.json())
-      .then((data) => {
-        setEbooks(data.data || data);
-      })
-      .catch((err) => {
-        if (err.name !== "AbortError") {
-          console.error("Error fetching ebooks:", err);
-        }
-      });
+      .then((r) => r.json())
+      .then((d) => setEbooks(d.data || d))
+      .catch((e) => { if (e.name !== "AbortError") console.error(e); });
 
     return () => controller.abort();
   }, [selectedMajor, searchText]);
 
-  // Fetch thesis once
   useEffect(() => {
     fetch(API_THESES)
-      .then((res) => res.json())
-      .then((data) => setThesis(data.data || data))
-      .catch((err) => console.error("Error fetching thesis:", err));
+      .then((r) => r.json())
+      .then((d) => setThesis(d.data || d))
+      .catch(console.error);
   }, []);
 
   return (
-    <div>
-      {/* Header + select + search */}
+    <div className="elib-page">
       <NavSection
         selectedMajor={selectedMajor}
         onMajorChange={setSelectedMajor}
@@ -73,94 +50,110 @@ export default function ELibraryUI() {
         onSearchTextChange={setSearchText}
       />
 
-      {/* E-books section */}
-      <Section
-        title="e-book"
+      <BookSection
+        title="E-Book"
+        icon="📚"
+        badgeCls="elib-section-badge--ebook"
         items={ebooks}
-        imageField="image" // change to 'cover_image_path' if needed
+        imageField="image"
         titleField="title"
         subTitleField="author"
+        category="e-book"
       />
 
-      {/* Theses section */}
-      <Section
+      <BookSection
         title="Thesis"
+        icon="🎓"
+        badgeCls="elib-section-badge--thesis"
         items={thesis}
         imageField="image"
         titleField="title"
         subTitleField="student"
+        category="thesis"
       />
     </div>
   );
 }
 
-function Section({
-  title,
-  items,
-  imageField,
-  titleField,
-  subTitleField,
-  category = title.toLowerCase(),
-}) {
+function BookSection({ title, icon, badgeCls, items, imageField, titleField, subTitleField, category }) {
   return (
-    <div className="container py-4">
-      <div className="d-flex justify-content-between align-items-center mb-3 type-library p-2">
-        <h4 className="fw-bold mb-0">{title}</h4>
-        <h5 className="text-primary mb-0" style={{ cursor: "pointer" }}>
-          <Link
-            to={`/e-library/see-all/${title
-              .toLowerCase()
-              .replace(/\s+/g, "-")}`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            See More...
+    <section className="elib-section">
+      <div className="container">
+        <div className="elib-section-header">
+          <div className="elib-section-left">
+            <span className={`elib-section-badge ${badgeCls}`}>
+              <span>{icon}</span> {title}
+            </span>
+            {items.length > 0 && (
+              <span className="elib-section-count">{items.length} items</span>
+            )}
+          </div>
+          <Link to={`/e-library/see-all/${category}`} className="elib-see-more">
+            See All →
           </Link>
-        </h5>
+        </div>
+
+        {items.length === 0 ? (
+          <div className="elib-empty">
+            <span className="elib-empty-icon">📭</span>
+            <p className="elib-empty-text">មិនមានទិន្នន័យសម្រាប់ប្រភេទនេះទេ</p>
+          </div>
+        ) : (
+          <div className="elib-books-grid">
+            {items.map((item, idx) => {
+              const rawPath = item[imageField] || "";
+              const normalized = rawPath.startsWith("/") ? rawPath.substring(1) : rawPath;
+              const imgSrc = normalized
+                ? BASE_STORAGE_URL + normalized
+                : null;
+
+              return (
+                <BookCard
+                  key={item.id}
+                  item={item}
+                  imgSrc={imgSrc}
+                  titleField={titleField}
+                  subTitleField={subTitleField}
+                  category={category}
+                  delay={idx * 40}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function BookCard({ item, imgSrc, titleField, subTitleField, category, delay }) {
+  const PLACEHOLDER = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='240' viewBox='0 0 180 240'%3E%3Crect width='180' height='240' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='13' fill='%2394a3b8'%3ENo Cover%3C/text%3E%3C/svg%3E`;
+
+  return (
+    <div className="elib-book-card" data-aos="fade-up" data-aos-delay={delay}>
+      <div className="elib-book-cover-wrap">
+        <img
+          src={imgSrc || PLACEHOLDER}
+          alt={item[titleField]}
+          className="elib-book-cover"
+          onError={(e) => { e.target.onerror = null; e.target.src = PLACEHOLDER; }}
+        />
+        <div className="elib-book-cover-hover">
+          <Link to={`/e-library/detail/${category}/${item.id}`} className="elib-hover-read-btn">
+            ចូលអានឯកសារ
+          </Link>
+        </div>
       </div>
 
-      {items.length === 0 ? (
-        <div className="text-center text-muted py-4">
-          មិនមានទិន្នន័យសម្រាប់ប្រភេទនេះទេ
-        </div>
-      ) : (
-        <div className="row">
-          {items.map((item) => {
-            const rawPath = item[imageField] || "";
-            const normalizedPath =
-              typeof rawPath === "string" && rawPath.startsWith("/")
-                ? rawPath.substring(1)
-                : rawPath;
-            const imgSrc = normalizedPath
-              ? BASE_STORAGE_URL + normalizedPath
-              : "https://via.placeholder.com/300x400?text=No+Image";
-
-            return (
-              <div
-                key={item.id}
-                className="col-12 col-sm-6 col-md-3 mb-3"
-                data-aos="fade-up"
-              >
-                <div className="card p-3 h-100">
-                  <img
-                    src={imgSrc}
-                    alt={item[titleField]}
-                    className="card-img-top mb-2"
-                    style={{ height: "auto", objectFit: "cover" }}
-                  />
-                  <h6 className="text-danger fw-bold">{item[titleField]}</h6>
-                  <small className="text-muted">{item[subTitleField]}</small>
-                  <Link
-                    to={`/e-library/detail/${category}/${item.id}`}
-                    className="btn btn-primary mt-2 khmer-google-font"
-                  >
-                    ចូលអានឯកសារ
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <div className="elib-book-body">
+        <p className="elib-book-title">{item[titleField]}</p>
+        {item[subTitleField] && (
+          <p className="elib-book-author">{item[subTitleField]}</p>
+        )}
+        <Link to={`/e-library/detail/${category}/${item.id}`} className="elib-read-link">
+          ចូលអានឯកសារ
+        </Link>
+      </div>
     </div>
   );
 }
