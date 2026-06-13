@@ -4,7 +4,7 @@ import { useLanguage } from "../context/LanguageContext";
 import "./SectionSkill.css";
 
 const SectionSkill = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -113,15 +113,15 @@ const SectionSkill = () => {
                 <div className="card-body d-flex flex-column">
                   <h5
                     className="card-title"
-                    style={{ color: "#0d6efd", fontWeight: "600",fontFamily: "Kuolen" }}
+                    style={{ color: "#0d6efd", fontWeight: "600", fontFamily: lang === 'kh' ? "Siemreap" : "Koulen" }}
                   >
-                    {department.title_eng}
+                    {lang === 'kh' ? department.title_khmer : department.title_eng}
                   </h5>
                   <p
                     className="card-text small"
-                    style={{ fontFamily: "Siemreap", color: "#03696dff" }}
+                    style={{ fontFamily: lang === 'kh' ? "inherit" : "Siemreap", color: "#03696dff" }}
                   >
-                    {department.title_khmer}
+                    {lang === 'kh' ? department.title_eng : department.title_khmer}
                   </p>
                   <p
                     className="card-text small text-truncate"

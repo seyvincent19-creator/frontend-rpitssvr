@@ -1,30 +1,35 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 const API_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/articles";
 const ITEMS_PER_PAGE = 6;
 
 const BASE_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/storage/"; // for thumbnails
 
-function normalizeArticle(raw) {
+function normalizeArticle(raw, lang) {
+  const title = lang === 'en' && raw.title_en ? raw.title_en : (raw.title ?? raw.name ?? "គ្មានចំណងជើង");
+  const rawContent = lang === 'en' && raw.content_en ? raw.content_en : raw.content;
+  const description =
+    raw.description ??
+    raw.excerpt ??
+    raw.summary ??
+    (typeof rawContent === "string"
+      ? rawContent.replace(/<[^>]*>/g, '').slice(0, 120) + "..."
+      : " ");
   return {
     id: raw.id ?? raw.article_id ?? crypto.randomUUID(),
-    title: raw.title ?? raw.name ?? "គ្មានចំណងជើង",
+    title,
     image: raw.thumbnail
       ? BASE_URL + raw.thumbnail
       : "https://via.placeholder.com/600x360?text=No+Image",
-    description:
-      raw.description ??
-      raw.excerpt ??
-      raw.summary ??
-      (typeof raw.content === "string"
-        ? raw.content.slice(0, 120) + "..."
-        : " "),
+    description,
     slug: raw.slug,
   };
 }
 
 const OtherNewsCardList = () => {
-  const [articles, setArticles] = useState([]);
+  const { lang, t } = useLanguage();
+  const [rawArticles, setRawArticles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -51,9 +56,7 @@ const OtherNewsCardList = () => {
         const json = await res.json();
         // Supports both: [ ... ] or { data: [ ... ] }
         const rawList = Array.isArray(json) ? json : json?.data ?? [];
-        const normalized = rawList.map(normalizeArticle);
-
-        setArticles(normalized);
+        setRawArticles(rawList);
         setCurrentPage(1); // reset to first page after load
       } catch (err) {
         if (err.name !== "AbortError") {
@@ -68,6 +71,11 @@ const OtherNewsCardList = () => {
     return () => controller.abort();
   }, []);
 
+  const articles = useMemo(
+    () => rawArticles.map(r => normalizeArticle(r, lang)),
+    [rawArticles, lang]
+  );
+
   const totalPages = useMemo(
     () => Math.max(1, Math.ceil(articles.length / ITEMS_PER_PAGE)),
     [articles.length]
@@ -81,7 +89,7 @@ const OtherNewsCardList = () => {
   const handlePrev = () => setCurrentPage((p) => Math.max(1, p - 1));
   const handleNext = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
 
-  const KhmerFont = { fontFamily: "Khmer OS Battambang" };
+  const KhmerFont = lang === 'kh' ? { fontFamily: "Khmer OS Battambang" } : {};
 
   return (
     <>
@@ -165,9 +173,9 @@ const OtherNewsCardList = () => {
                     <a
                       className="btn btn-outline-primary btn-sm"
                       href={`/article/${item.id}`}
-                      style={{ fontFamily: "Khmer OS Battambang" }}
+                      style={KhmerFont}
                     >
-                      អានបន្ថែម
+                      {t('news_read_more_short')}
                     </a>
                   </div>
                 </div>
@@ -192,18 +200,20 @@ const OtherNewsCardList = () => {
             className="btn btn-secondary btn-sm me-2"
             onClick={handlePrev}
             disabled={currentPage === 1}
+            style={KhmerFont}
           >
-            ← មុន
+            {lang === 'kh' ? '← មុន' : '← Prev'}
           </button>
           <span style={KhmerFont}>
-            ទំព័រ {currentPage} / {totalPages}
+            {lang === 'kh' ? `ទំព័រ ${currentPage} / ${totalPages}` : `Page ${currentPage} / ${totalPages}`}
           </span>
           <button
             className="btn btn-secondary btn-sm ms-2"
             onClick={handleNext}
             disabled={currentPage === totalPages}
+            style={KhmerFont}
           >
-            បន្ទាប់ →
+            {lang === 'kh' ? 'បន្ទាប់ →' : 'Next →'}
           </button>
         </div>
       )}

@@ -3,10 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
-import "./ArticleDetail.css"; // Import your CSS for styling
+import "./ArticleDetail.css";
+import { useLanguage } from "../context/LanguageContext";
 
 const ArticleDetail = () => {
   const { id } = useParams();
+  const { lang } = useLanguage();
   const [article, setArticle] = useState(null);
   const [allArticles, setAllArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -99,21 +101,24 @@ const ArticleDetail = () => {
         <Link to="/" className="btn btn-secondary btn-sm mb-3">
           <FaArrowLeft className="me-2" /> Back to Articles
         </Link>
-        <h1 className="mb-3 article-title" style={{ color: "#1e40af", lineHeight: "1.7", fontFamily: "Siemreap", fontSize: "1.6rem", fontWeight: "700" }}>{article.title}</h1>
+        <h1 className="mb-3 article-title" style={{ color: "#1e40af", lineHeight: "1.7", fontFamily: lang === 'kh' ? "Siemreap" : "inherit", fontSize: "1.6rem", fontWeight: "700" }}>
+          {lang === 'en' && article.title_en ? article.title_en : article.title}
+        </h1>
         <p className="text-muted small mb-4">
           Published on: {article.created_at ? new Date(article.created_at).toLocaleDateString("en-GB") : ""}
           {article.views_count != null && ` | Views: ${article.views_count.toLocaleString()}`}
         </p>
         <img
           src={imageUrl}
-          alt={article.title}
+          alt={lang === 'en' && article.title_en ? article.title_en : article.title}
           className="img-fluid rounded mb-4"
           style={{ maxHeight: "450px", width: "100%", objectFit: "cover" }}
         />
 
         <div
           className="mb-5 article-body"
-          dangerouslySetInnerHTML={{ __html: article.content }}
+          style={{ fontFamily: lang === 'kh' ? "Siemreap" : "inherit" }}
+          dangerouslySetInnerHTML={{ __html: lang === 'en' && article.content_en ? article.content_en : article.content }}
         />
 
         {/* Related Images */}

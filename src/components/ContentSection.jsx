@@ -49,12 +49,17 @@ const ShareDropdown = ({ item }) => (
   </div>
 );
 
-const FeaturedCard = ({ item, t }) => (
+const FeaturedCard = ({ item, t, lang }) => {
+  const title = lang === 'en' && item.title_en ? item.title_en : item.title;
+  const excerpt = lang === 'en' && item.content_en
+    ? item.content_en.replace(/<[^>]*>/g, '').slice(0, 160) + '…'
+    : item.excerpt;
+  return (
   <div className="content-featured-card h-100">
     <Link to={`/article/${item.id}`} className="d-block featured-img-wrap">
       <img
         src={getImageUrl(item.thumbnail)}
-        alt={item.title}
+        alt={title}
         className="featured-img"
         onError={(e) => { e.target.onerror = null; e.target.src = PLACEHOLDER; }}
       />
@@ -62,9 +67,9 @@ const FeaturedCard = ({ item, t }) => (
     </Link>
     <div className="content-card-body">
       <Link to={`/article/${item.id}`} className="text-decoration-none">
-        <h5 className="content-title featured-title">{item.title}</h5>
+        <h5 className="content-title featured-title">{title}</h5>
       </Link>
-      <p className="content-excerpt">{item.excerpt}</p>
+      <p className="content-excerpt">{excerpt}</p>
       <div className="content-footer">
         <span className="content-date">
           {new Date(item.created_at).toLocaleDateString("en-GB")}
@@ -78,21 +83,24 @@ const FeaturedCard = ({ item, t }) => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
-const SmallCard = ({ item, t }) => (
+const SmallCard = ({ item, t, lang }) => {
+  const title = lang === 'en' && item.title_en ? item.title_en : item.title;
+  return (
   <div className="content-small-card">
     <Link to={`/article/${item.id}`} className="small-card-img-wrap">
       <img
         src={getImageUrl(item.thumbnail)}
-        alt={item.title}
+        alt={title}
         className="small-card-img"
         onError={(e) => { e.target.onerror = null; e.target.src = PLACEHOLDER; }}
       />
     </Link>
     <div className="small-card-body">
       <Link to={`/article/${item.id}`} className="text-decoration-none">
-        <h6 className="content-title small-title">{item.title}</h6>
+        <h6 className="content-title small-title">{title}</h6>
       </Link>
       <div className="content-footer mt-auto">
         <span className="content-date">
@@ -107,10 +115,11 @@ const SmallCard = ({ item, t }) => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 const ContentSection = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -173,11 +182,11 @@ const ContentSection = () => {
       ) : (
         <div className="row g-3">
           <div className="col-lg-6">
-            {featured ? <FeaturedCard item={featured} t={t} /> : null}
+            {featured ? <FeaturedCard item={featured} t={t} lang={lang} /> : null}
           </div>
           <div className="col-lg-6 d-flex flex-column gap-2">
             {rest.map((item) => (
-              <SmallCard key={item.id ?? item.article_id} item={item} t={t} />
+              <SmallCard key={item.id ?? item.article_id} item={item} t={t} lang={lang} />
             ))}
           </div>
         </div>
