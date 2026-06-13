@@ -124,7 +124,8 @@ const ContentSection = () => {
       .then((data) => {
         // handle both {data: [...]} and direct array responses
         const list = Array.isArray(data) ? data : (data.data || data.articles || []);
-        setArticles(list);
+        const sorted = [...list].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        setArticles(sorted);
         setLoading(false);
       })
       .catch((err) => {
