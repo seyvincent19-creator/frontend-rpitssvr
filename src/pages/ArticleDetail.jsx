@@ -147,25 +147,34 @@ const ArticleDetail = () => {
           otherContent={advertisementBlock}
         />
         <div className="mt-4 p-3 bg-light rounded">
-          <h5 className="mb-3">Recent Posts</h5>
+          <h5 className="mb-3" style={lang === 'kh' ? { fontFamily: 'Siemreap' } : {}}>
+            {lang === 'kh' ? 'អត្ថបទថ្មីៗ' : 'Recent Posts'}
+          </h5>
           {recentPosts.length > 0 ? (
             <ul className="list-unstyled mb-0">
-              {recentPosts.map((post) => (
-                <li key={post.article_id} className="mb-2">
-                  <Link
-                    to={`/article/${post.article_id}`}
-                    className="text-decoration-none"
-                  >
-                    {post.title}
-                  </Link>
-                  <p className="small text-muted mb-0">
-                    {post.created_at ? new Date(post.created_at).toLocaleDateString("en-GB") : ""}
-                  </p>
-                </li>
-              ))}
+              {recentPosts.map((post) => {
+                const postId = post.id ?? post.article_id;
+                const postTitle = lang === 'en' && post.title_en ? post.title_en : post.title;
+                return (
+                  <li key={postId} className="mb-2">
+                    <Link
+                      to={`/article/${postId}`}
+                      className="text-decoration-none"
+                      style={lang === 'kh' ? { fontFamily: 'Siemreap', fontSize: '0.9rem' } : { fontSize: '0.9rem' }}
+                    >
+                      {postTitle}
+                    </Link>
+                    <p className="small text-muted mb-0">
+                      {post.created_at ? new Date(post.created_at).toLocaleDateString("en-GB") : ""}
+                    </p>
+                  </li>
+                );
+              })}
             </ul>
           ) : (
-            <p className="small text-muted">No recent posts.</p>
+            <p className="small text-muted" style={lang === 'kh' ? { fontFamily: 'Siemreap' } : {}}>
+              {lang === 'kh' ? 'មិនទាន់មានអត្ថបទ។' : 'No recent posts.'}
+            </p>
           )}
         </div>
       </div>
