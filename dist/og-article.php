@@ -1,11 +1,14 @@
 <?php
 // OG proxy — serves article Open Graph tags under rpisvr.edu.kh domain
-// URL pattern: /og/article/{id}
-// Nginx rewrites this path here; PHP reads the ID from REQUEST_URI
+// Accepts: /og-article.php?id=33  OR  internal rewrite from /og/article/33
 
-$uri = $_SERVER['REQUEST_URI'] ?? '';
-preg_match('/\/og\/article\/(\d+)/', $uri, $m);
-$id = isset($m[1]) ? intval($m[1]) : 0;
+// Try ?id= query param first, then fall back to parsing the URI
+$id = intval($_GET['id'] ?? 0);
+if (!$id) {
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    preg_match('/(\d+)/', $uri, $m);
+    $id = intval($m[1] ?? 0);
+}
 
 $frontendBase = 'https://rpisvr.edu.kh';
 $backendApi   = 'https://phplaravel-1634699-6478817.cloudwaysapps.com/api/articles/';
