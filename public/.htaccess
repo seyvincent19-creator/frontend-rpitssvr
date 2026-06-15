@@ -5,6 +5,11 @@ Options +FollowSymLinks
     RewriteEngine On
     RewriteBase /
 
+    # Social media bots visiting /article/{id} get redirected to the Laravel OG page
+    # so Facebook, Telegram, etc. can read proper og:image / og:title meta tags
+    RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit|Facebot|Twitterbot|LinkedInBot|TelegramBot|Slackbot|WhatsApp|Pinterest|ia_archiver) [NC]
+    RewriteRule ^article/([0-9]+)/?$ https://phplaravel-1634699-6478817.cloudwaysapps.com/og/article/$1 [R=302,L]
+
     # Serve existing files and directories directly
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
