@@ -61,7 +61,6 @@ if (!empty($article['thumbnail'])) {
     <meta property="og:image"       content="<?= $image ?>">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url"         content="<?= $url ?>">
     <meta property="og:site_name"   content="វិទ្យាស្ថានបច្ចេកទេសសស្វាយរៀង">
     <meta name="description"        content="<?= $description ?>">
     <script>window.location.replace('<?= addslashes($url) ?>');</script>
