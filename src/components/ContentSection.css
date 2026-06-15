@@ -144,6 +144,13 @@
   font-size: 11px;
   color: #999;
 }
+.view-count-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  color: #6c757d;
+  white-space: nowrap;
+}
 
 .dropdown-menu {
   z-index: 1055 !important;

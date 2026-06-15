@@ -76,6 +76,10 @@ const FeaturedCard = ({ item, t, lang }) => {
           {new Date(item.created_at).toLocaleDateString("en-GB")}
         </span>
         <div className="d-flex align-items-center gap-2">
+          <span className="view-count-badge">
+            <FaEye className="me-1" />
+            {(item.view_count ?? 0).toLocaleString()}
+          </span>
           <Link to={`/article/${item.id}`} className="btn btn-primary btn-sm rounded-pill px-3">
             {t('news_read_more')}
           </Link>
@@ -108,6 +112,10 @@ const SmallCard = ({ item, t, lang }) => {
           {new Date(item.created_at).toLocaleDateString("en-GB")}
         </span>
         <div className="d-flex align-items-center gap-2">
+          <span className="view-count-badge">
+            <FaEye className="me-1" />
+            {(item.view_count ?? 0).toLocaleString()}
+          </span>
           <Link to={`/article/${item.id}`} className="btn btn-outline-primary btn-sm rounded-pill px-2" style={{ fontSize: "12px" }}>
             {t('news_read_more_short')}
           </Link>
