@@ -2,6 +2,10 @@
 // OG proxy — serves article Open Graph tags under rpisvr.edu.kh domain
 // Accepts: /og-article.php?id=33  OR  internal rewrite from /og/article/33
 
+// Prevent Varnish / proxy caches from storing this dynamic page
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Pragma: no-cache');
+
 // Try ?id= query param first, then fall back to parsing the URI
 $id = intval($_GET['id'] ?? 0);
 if (!$id) {
