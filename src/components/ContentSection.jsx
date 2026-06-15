@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { FaEye, FaShareAlt, FaFacebookF, FaTelegramPlane, FaNewspaper } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
 
-const API_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/articles";
+const API_URL  = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/articles";
 const BASE_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/storage/";
+const OG_URL   = (id) => `https://phplaravel-1634699-6478817.cloudwaysapps.com/og/article/${id}`;
 const PLACEHOLDER = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e9ecef'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='14' fill='%236c757d'%3ENo Image%3C/text%3E%3C/svg%3E`;
 
 const getImageUrl = (thumbnail) =>
@@ -26,7 +27,7 @@ const ShareDropdown = ({ item }) => (
       <li>
         <a
           className="dropdown-item"
-          href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/article/${item?.id}`}
+          href={`https://www.facebook.com/sharer/sharer.php?u=${OG_URL(item?.id)}`}
           target="_blank"
           rel="noreferrer"
         >
@@ -37,7 +38,7 @@ const ShareDropdown = ({ item }) => (
       <li>
         <a
           className="dropdown-item"
-          href={`https://t.me/share/url?url=${window.location.origin}/article/${item?.id}`}
+          href={`https://t.me/share/url?url=${OG_URL(item?.id)}`}
           target="_blank"
           rel="noreferrer"
         >
