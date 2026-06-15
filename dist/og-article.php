@@ -59,7 +59,7 @@ if (!empty($article['thumbnail'])) {
     <meta property="og:title"       content="<?= $title ?>">
     <meta property="og:description" content="<?= $description ?>">
     <meta property="og:image"       content="<?= $image ?>">
-    <meta property="og:site_name"   content="វិទ្យាស្ថានបច្ចេកទេសសស្វាយរៀង">
+    <meta property="og:site_name"   content="វិទ្យាស្ថានពហុបច្ចេកទេសភូមិភាគតេជោសែនស្វាយរៀង">
     <meta name="twitter:card"       content="summary_large_image">
     <meta name="twitter:title"      content="<?= $title ?>">
     <meta name="twitter:description" content="<?= $description ?>">
