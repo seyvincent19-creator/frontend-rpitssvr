@@ -1,10 +1,21 @@
 <?php
 // OG proxy — serves article Open Graph tags under rpisvr.edu.kh domain
-// Accepts: /og-article.php?id=33  OR  internal rewrite from /og/article/33
+// Every request to /article/{id} is internally rewritten here (see Cloudways Web Rules,
+// which has no User-Agent condition), so bot detection happens here instead:
+// - social bots get the article-specific OG tags
+// - real browsers get passed straight through to the SPA shell, unchanged
 
 // Prevent Varnish / proxy caches from storing this dynamic page
 header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Pragma: no-cache');
+
+$ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
+$isBot = preg_match('/facebookexternalhit|Facebot|Twitterbot|LinkedInBot|TelegramBot|Slackbot|WhatsApp|Pinterest|ia_archiver/i', $ua);
+
+if (!$isBot) {
+    readfile(__DIR__ . '/index.html');
+    exit;
+}
 
 // Try ?id= query param first, then fall back to parsing the URI
 $id = intval($_GET['id'] ?? 0);
@@ -19,7 +30,7 @@ $backendApi   = 'https://phplaravel-1634699-6478817.cloudwaysapps.com/api/articl
 $storageBase  = 'https://phplaravel-1634699-6478817.cloudwaysapps.com/storage/';
 
 if (!$id) {
-    header("Location: {$frontendBase}");
+    readfile(__DIR__ . '/index.html');
     exit;
 }
 
@@ -37,7 +48,7 @@ curl_close($ch);
 $article = ($httpCode === 200 && $json) ? json_decode($json, true) : null;
 
 if (!$article) {
-    header("Location: {$frontendBase}");
+    readfile(__DIR__ . '/index.html');
     exit;
 }
 
@@ -69,7 +80,6 @@ if (!empty($article['thumbnail'])) {
     <meta name="twitter:description" content="<?= $description ?>">
     <meta name="twitter:image"      content="<?= $image ?>">
     <meta name="description"        content="<?= $description ?>">
-    <script>window.location.replace('<?= addslashes($url) ?>');</script>
 </head>
 <body><a href="<?= $url ?>"><?= $title ?></a></body>
 </html>
