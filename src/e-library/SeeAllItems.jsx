@@ -1,53 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import NavSection from "./components/NavSection";
-// local API
-// const API_ENDPOINTS = {
-//   "e-book": "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/ebooks",
-//   thesis: "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/thesis",
-//   "e-publications": "https://your-api-link.com/api/e-publications",
-//   audios: "https://your-api-link.com/api/audios",
-//   journals: "https://your-api-link.com/api/journals",
-//   videos: "https://your-api-link.com/api/videos",
-// };
 
-// const BASE_STORAGE_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/storage/";
-// Server API
+const API_BASE = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api";
 const API_ENDPOINTS = {
-  "e-book": "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/ebooks",
-  thesis: "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/thesis",
-  // "e-publications": "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/e-publications",
-  // audios: "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/audios",
-  // journals: "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/journals",
-  // videos: "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/videos",
+  "e-book": `${API_BASE}/ebooks`,
+  thesis: `${API_BASE}/thesis`,
+  "e-publication": `${API_BASE}/e-publications`,
+  audio: `${API_BASE}/audios`,
+  journal: `${API_BASE}/journals`,
+  video: `${API_BASE}/videos`,
 };
 
 const BASE_STORAGE_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/storage/";
 const titleFieldMap = {
   "e-book": "title",
   thesis: "title",
-  // "e-publications": "title",
-  // audios: "title",
-  // journals: "title",
-  // videos: "title",
+  "e-publication": "title",
+  audio: "title",
+  journal: "title",
+  video: "title",
 };
 
 const subTitleFieldMap = {
   "e-book": "author",
   thesis: "student",
-  "e-publications": "author",
-  audios: "author",
-  journals: "author",
-  videos: "creator",
+  "e-publication": "author",
+  audio: "author",
+  journal: "author",
+  video: "creator",
 };
 
 const imageFieldMap = {
   "e-book": "image",
   thesis: "image",
-  "e-publications": "image",
-  audios: "image",
-  journals: "image",
-  videos: "image",
+  "e-publication": "image",
+  audio: "image",
+  journal: "image",
+  video: "image",
 };
 
 function SeeAllItems() {

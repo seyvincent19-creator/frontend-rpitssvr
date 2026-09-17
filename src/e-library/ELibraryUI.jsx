@@ -5,13 +5,16 @@ import "./ELibraryUI.css";
 import { Link } from "react-router-dom";
 import NavSection from "./components/NavSection";
 
-const API_EBOOKS = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/ebooks";
-const API_THESES = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api/thesis";
+const API_BASE = "https://phplaravel-1634699-6478817.cloudwaysapps.com/api";
 const BASE_STORAGE_URL = "https://phplaravel-1634699-6478817.cloudwaysapps.com/storage/";
 
 export default function ELibraryUI() {
   const [ebooks, setEbooks] = useState([]);
   const [thesis, setThesis] = useState([]);
+  const [epublications, setEpublications] = useState([]);
+  const [journals, setJournals] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [audios, setAudios] = useState([]);
   const [selectedMajor, setSelectedMajor] = useState("");
   const [searchText, setSearchText] = useState("");
 
@@ -24,7 +27,7 @@ export default function ELibraryUI() {
     const params = new URLSearchParams();
     if (selectedMajor) params.append("category", selectedMajor);
     if (searchText.trim()) params.append("q", searchText.trim());
-    const url = API_EBOOKS + (params.toString() ? `?${params.toString()}` : "");
+    const url = `${API_BASE}/ebooks` + (params.toString() ? `?${params.toString()}` : "");
 
     fetch(url, { signal: controller.signal })
       .then((r) => r.json())
@@ -35,9 +38,37 @@ export default function ELibraryUI() {
   }, [selectedMajor, searchText]);
 
   useEffect(() => {
-    fetch(API_THESES)
+    fetch(`${API_BASE}/thesis`)
       .then((r) => r.json())
       .then((d) => setThesis(d.data || d))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/e-publications`)
+      .then((r) => r.json())
+      .then((d) => setEpublications(d.data || d))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/journals`)
+      .then((r) => r.json())
+      .then((d) => setJournals(d.data || d))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/videos`)
+      .then((r) => r.json())
+      .then((d) => setVideos(d.data || d))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/audios`)
+      .then((r) => r.json())
+      .then((d) => setAudios(d.data || d))
       .catch(console.error);
   }, []);
 
@@ -70,6 +101,50 @@ export default function ELibraryUI() {
         titleField="title"
         subTitleField="student"
         category="thesis"
+      />
+
+      <BookSection
+        title="E-Publications"
+        icon="📰"
+        badgeCls="elib-section-badge--ebook"
+        items={epublications}
+        imageField="image"
+        titleField="title"
+        subTitleField="author"
+        category="e-publication"
+      />
+
+      <BookSection
+        title="Journals"
+        icon="🗞️"
+        badgeCls="elib-section-badge--thesis"
+        items={journals}
+        imageField="image"
+        titleField="title"
+        subTitleField="author"
+        category="journal"
+      />
+
+      <BookSection
+        title="Videos"
+        icon="🎬"
+        badgeCls="elib-section-badge--ebook"
+        items={videos}
+        imageField="image"
+        titleField="title"
+        subTitleField="creator"
+        category="video"
+      />
+
+      <BookSection
+        title="Audios"
+        icon="🎧"
+        badgeCls="elib-section-badge--thesis"
+        items={audios}
+        imageField="image"
+        titleField="title"
+        subTitleField="author"
+        category="audio"
       />
     </div>
   );
